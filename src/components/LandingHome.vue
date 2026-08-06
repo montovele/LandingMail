@@ -18,6 +18,6 @@ import Contact from "./Contact.vue";
 
 <CTASection />
 
-<Contact />
+<!-- <Contact /> -->
 
 </template>

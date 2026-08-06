@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3010';
+const API_URL = 'https://hencom.com.mx:3010';
 export async function apiFetch(endpoint, options = {}) {
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   const url = `${API_URL}${normalizedEndpoint}`;
