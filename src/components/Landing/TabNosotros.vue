@@ -99,12 +99,18 @@ const advantages = [
 
   </section>
 </template>
-
 <style scoped>
 
 .about-section{
 
     padding-top:20px;
+
+    /* Fondo oscuro principal para asegurar el contraste de las letras claras */
+    background: #0b1220;
+
+    padding-bottom: 50px;
+
+    color: #f8fafc;
 
 }
 
@@ -116,13 +122,17 @@ const advantages = [
 
     border-radius:30px;
 
-    background:#eef5ff;
+    background:rgba(30,41,59,.75);
 
-    color:#0d6efd;
+    border:1px solid rgba(56,189,248,.25);
+
+    color:#38bdf8;
 
     font-weight:700;
 
     margin-bottom:20px;
+
+    backdrop-filter:blur(10px);
 
 }
 
@@ -132,7 +142,7 @@ const advantages = [
 
     font-weight:800;
 
-    color:#1b2940;
+    color:#f8fafc;
 
     margin-bottom:25px;
 
@@ -140,7 +150,7 @@ const advantages = [
 
 .about-section p{
 
-    color:#667085;
+    color:#94a3b8;
 
     line-height:1.9;
 

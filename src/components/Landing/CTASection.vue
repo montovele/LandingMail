@@ -117,26 +117,27 @@ Agendar Asesoría
 </section>
 
 </template>
-
 <style scoped>
 
 .cta-section{
 
 padding:120px 0;
 
-background:linear-gradient(180deg,#f8fbff 0%,#eef5ff 100%);
+background:linear-gradient(180deg,#0b1220 0%,#111827 100%);
 
 }
 
 .cta-card{
 
-background:#ffffff;
+background:#1e293b;
 
 border-radius:28px;
 
 padding:70px;
 
-box-shadow:0 30px 80px rgba(0,0,0,.08);
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:0 30px 80px rgba(0,0,0,.45);
 
 position:relative;
 
@@ -158,7 +159,7 @@ width:100%;
 
 height:8px;
 
-background:linear-gradient(90deg,#0d6efd,#20c997);
+background:linear-gradient(90deg,#0284c7,#38bdf8);
 
 }
 
@@ -170,13 +171,17 @@ padding:8px 18px;
 
 border-radius:30px;
 
-background:#eef5ff;
+background:rgba(30,41,59,.75);
 
-color:#0d6efd;
+border:1px solid rgba(56,189,248,.25);
+
+color:#38bdf8;
 
 font-weight:700;
 
 margin-bottom:25px;
+
+backdrop-filter:blur(10px);
 
 }
 
@@ -186,7 +191,7 @@ font-size:2.6rem;
 
 font-weight:800;
 
-color:#1b2940;
+color:#f8fafc;
 
 margin-bottom:25px;
 
@@ -200,7 +205,7 @@ font-size:17px;
 
 line-height:1.9;
 
-color:#667085;
+color:#94a3b8;
 
 margin-bottom:35px;
 
@@ -228,7 +233,7 @@ font-size:17px;
 
 font-weight:600;
 
-color:#374151;
+color:#e2e8f0;
 
 }
 
@@ -238,7 +243,7 @@ font-size:22px;
 
 margin-right:15px;
 
-color:#0d6efd;
+color:#38bdf8;
 
 }
 
@@ -272,17 +277,41 @@ transition:.3s;
 
 .btn-primary{
 
-box-shadow:0 15px 40px rgba(13,110,253,.25);
+background:#0284c7;
+
+border-color:#0284c7;
+
+color:#ffffff;
+
+box-shadow:0 15px 40px rgba(2,132,199,.4);
 
 }
 
 .btn-primary:hover{
 
+background:#0369a1;
+
+border-color:#0369a1;
+
 transform:translateY(-3px);
 
 }
 
+.btn-outline-primary{
+
+border-width:2px;
+
+border-color:#38bdf8;
+
+color:#38bdf8;
+
+}
+
 .btn-outline-primary:hover{
+
+background:#38bdf8;
+
+color:#0f172a;
 
 transform:translateY(-3px);
 

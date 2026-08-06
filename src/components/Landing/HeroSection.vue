@@ -653,7 +653,6 @@ const keywords = [
 </section>
 
 </template>
-
 <style scoped>
 
 /* ==========================================================
@@ -671,9 +670,9 @@ const keywords = [
     background:
         linear-gradient(
             180deg,
-            #fbfdff 0%,
-            #f5f9fd 45%,
-            #edf4fb 100%
+            #0b1220 0%,
+            #0f172a 45%,
+            #111827 100%
         );
 
 }
@@ -706,7 +705,7 @@ const keywords = [
 
     filter:blur(90px);
 
-    opacity:.65;
+    opacity:.45;
 
 }
 
@@ -716,7 +715,7 @@ const keywords = [
 
     height:520px;
 
-    background:#5ab4ff;
+    background:#1d4ed8;
 
     top:-180px;
 
@@ -730,7 +729,7 @@ const keywords = [
 
     height:600px;
 
-    background:#c7e5ff;
+    background:#0284c7;
 
     bottom:-220px;
 
@@ -748,9 +747,9 @@ const keywords = [
 
     background-image:
 
-        linear-gradient(rgba(13,110,253,.04) 1px, transparent 1px),
+        linear-gradient(rgba(56,189,248,.07) 1px, transparent 1px),
 
-        linear-gradient(90deg, rgba(13,110,253,.04) 1px, transparent 1px);
+        linear-gradient(90deg, rgba(56,189,248,.07) 1px, transparent 1px);
 
     background-size:40px 40px;
 
@@ -792,17 +791,17 @@ const keywords = [
 
     border-radius:999px;
 
-    background:rgba(255,255,255,.85);
+    background:rgba(30,41,59,.75);
 
-    border:1px solid rgba(13,110,253,.12);
+    border:1px solid rgba(56,189,248,.25);
 
     box-shadow:
 
-        0 15px 35px rgba(13,110,253,.08);
+        0 15px 35px rgba(0,0,0,.3);
 
     backdrop-filter:blur(12px);
 
-    color:#0d6efd;
+    color:#38bdf8;
 
     font-weight:700;
 
@@ -830,7 +829,7 @@ const keywords = [
 
     font-weight:900;
 
-    color:#17324d;
+    color:#f8fafc;
 
     letter-spacing:-1.5px;
 
@@ -846,7 +845,7 @@ const keywords = [
 
     line-height:1.9;
 
-    color:#637487;
+    color:#94a3b8;
 
     margin-bottom:40px;
 
@@ -878,19 +877,19 @@ const keywords = [
 
     padding:14px 18px;
 
-    background:white;
+    background:#1e293b;
 
     border-radius:18px;
 
-    border:1px solid #e7eef7;
+    border:1px solid rgba(255,255,255,.08);
 
     box-shadow:
 
-        0 15px 35px rgba(23,50,77,.05);
+        0 15px 35px rgba(0,0,0,.25);
 
     font-weight:600;
 
-    color:#31465c;
+    color:#e2e8f0;
 
     transition:.35s;
 
@@ -900,11 +899,11 @@ const keywords = [
 
     transform:translateY(-5px);
 
-    border-color:#0d6efd;
+    border-color:#38bdf8;
 
     box-shadow:
 
-        0 20px 40px rgba(13,110,253,.12);
+        0 20px 40px rgba(56,189,248,.2);
 
 }
 
@@ -912,7 +911,7 @@ const keywords = [
 
     font-size:22px;
 
-    color:#0d6efd;
+    color:#38bdf8;
 
 }
 
@@ -950,13 +949,23 @@ const keywords = [
 
 .hero-buttons .btn-primary{
 
+    background:#0284c7;
+
+    border-color:#0284c7;
+
+    color:#ffffff;
+
     box-shadow:
 
-        0 20px 45px rgba(13,110,253,.28);
+        0 20px 45px rgba(2,132,199,.4);
 
 }
 
 .hero-buttons .btn-primary:hover{
+
+    background:#0369a1;
+
+    border-color:#0369a1;
 
     transform:translateY(-4px);
 
@@ -966,9 +975,17 @@ const keywords = [
 
     border-width:2px;
 
+    border-color:#38bdf8;
+
+    color:#38bdf8;
+
 }
 
 .hero-buttons .btn-outline-primary:hover{
+
+    background:#38bdf8;
+
+    color:#0f172a;
 
     transform:translateY(-4px);
 
@@ -1004,11 +1021,11 @@ const keywords = [
 
     text-decoration:none;
 
-    color:#4b6178;
+    color:#cbd5e1;
 
-    background:rgba(255,255,255,.85);
+    background:rgba(30,41,59,.75);
 
-    border:1px solid #e6edf7;
+    border:1px solid rgba(255,255,255,.08);
 
     transition:.30s;
 
@@ -1016,15 +1033,15 @@ const keywords = [
 
 .quick-action:hover{
 
-    color:#0d6efd;
+    color:#38bdf8;
 
     transform:translateY(-4px);
 
-    border-color:#0d6efd;
+    border-color:#38bdf8;
 
     box-shadow:
 
-        0 15px 35px rgba(13,110,253,.12);
+        0 15px 35px rgba(56,189,248,.18);
 
 }
 
@@ -1052,7 +1069,7 @@ const keywords = [
 
 .stat-card{
 
-    background:white;
+    background:#1e293b;
 
     border-radius:22px;
 
@@ -1060,11 +1077,11 @@ const keywords = [
 
     text-align:center;
 
-    border:1px solid #e7eef7;
+    border:1px solid rgba(255,255,255,.08);
 
     box-shadow:
 
-        0 18px 40px rgba(20,45,75,.06);
+        0 18px 40px rgba(0,0,0,.3);
 
     transition:.35s;
 
@@ -1074,11 +1091,11 @@ const keywords = [
 
     transform:translateY(-8px);
 
-    border-color:#0d6efd;
+    border-color:#38bdf8;
 
     box-shadow:
 
-        0 25px 55px rgba(13,110,253,.15);
+        0 25px 55px rgba(56,189,248,.2);
 
 }
 
@@ -1090,7 +1107,7 @@ const keywords = [
 
     font-weight:900;
 
-    color:#0d6efd;
+    color:#38bdf8;
 
 }
 
@@ -1100,7 +1117,7 @@ const keywords = [
 
     margin-top:12px;
 
-    color:#6b7c8e;
+    color:#94a3b8;
 
     line-height:1.5;
 
@@ -1156,9 +1173,9 @@ const keywords = [
 
     letter-spacing:12px;
 
-    color:#0d6efd;
+    color:#38bdf8;
 
-    opacity:.035;
+    opacity:.04;
 
     white-space:nowrap;
 
@@ -1180,7 +1197,6 @@ const keywords = [
 
     animation:heroFloat 8s ease-in-out infinite;
 
-
 }
 
 .hero-image img{
@@ -1191,8 +1207,9 @@ const keywords = [
 
     filter:
 
-        drop-shadow(0 35px 60px rgba(13,110,253,.18));
-            border-radius: 20px;
+        drop-shadow(0 35px 60px rgba(0,0,0,.6));
+
+    border-radius:20px;
 
 }
 
@@ -1214,17 +1231,17 @@ const keywords = [
 
     min-width:250px;
 
-    background:rgba(255,255,255,.82);
+    background:rgba(30,41,59,.82);
 
     backdrop-filter:blur(18px);
 
-    border:1px solid rgba(255,255,255,.55);
+    border:1px solid rgba(255,255,255,.12);
 
     border-radius:22px;
 
     box-shadow:
 
-        0 25px 60px rgba(15,45,75,.10);
+        0 25px 60px rgba(0,0,0,.45);
 
     z-index:20;
 
@@ -1236,9 +1253,11 @@ const keywords = [
 
     transform:translateY(-8px);
 
+    border-color:rgba(56,189,248,.4);
+
     box-shadow:
 
-        0 35px 70px rgba(13,110,253,.18);
+        0 35px 70px rgba(56,189,248,.25);
 
 }
 
@@ -1252,8 +1271,8 @@ const keywords = [
 
     background:linear-gradient(
         135deg,
-        #0d6efd,
-        #5cb6ff
+        #0284c7,
+        #38bdf8
     );
 
     color:white;
@@ -1274,7 +1293,7 @@ const keywords = [
 
     display:block;
 
-    color:#183153;
+    color:#f8fafc;
 
     font-size:1rem;
 
@@ -1286,7 +1305,7 @@ const keywords = [
 
     margin:0;
 
-    color:#718397;
+    color:#94a3b8;
 
     font-size:.90rem;
 
@@ -1362,19 +1381,19 @@ const keywords = [
 
     align-items:flex-start;
 
-    background:white;
+    background:#1e293b;
 
     border-radius:24px;
 
     padding:28px;
 
-    border:1px solid #e7eef7;
+    border:1px solid rgba(255,255,255,.08);
 
     transition:.35s;
 
     box-shadow:
 
-        0 18px 45px rgba(25,45,75,.05);
+        0 18px 45px rgba(0,0,0,.3);
 
 }
 
@@ -1382,11 +1401,11 @@ const keywords = [
 
     transform:translateY(-10px);
 
-    border-color:#0d6efd;
+    border-color:#38bdf8;
 
     box-shadow:
 
-        0 30px 65px rgba(13,110,253,.12);
+        0 30px 65px rgba(56,189,248,.18);
 
 }
 
@@ -1400,8 +1419,8 @@ const keywords = [
 
     background:linear-gradient(
         135deg,
-        #0d6efd,
-        #65b9ff
+        #0284c7,
+        #38bdf8
     );
 
     display:flex;
@@ -1422,7 +1441,7 @@ const keywords = [
 
     margin:0 0 12px;
 
-    color:#183153;
+    color:#f8fafc;
 
     font-size:1.15rem;
 
@@ -1434,7 +1453,7 @@ const keywords = [
 
     margin:0;
 
-    color:#708295;
+    color:#94a3b8;
 
     line-height:1.7;
 
@@ -1721,4 +1740,3 @@ const keywords = [
 }
 
 </style>
-

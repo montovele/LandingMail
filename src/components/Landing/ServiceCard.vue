@@ -116,7 +116,6 @@ const cardStyle = computed(() => ({
 
   </div>
 </template>
-
 <style scoped>
 
 .service-card{
@@ -129,7 +128,7 @@ const cardStyle = computed(() => ({
 
     justify-content:space-between;
 
-    background:#fff;
+    background:#1e293b;
 
     border-radius:20px;
 
@@ -137,9 +136,9 @@ const cardStyle = computed(() => ({
 
     height:100%;
 
-    border:1px solid #edf2f7;
+    border:1px solid rgba(255,255,255,.08);
 
-    box-shadow:0 10px 35px rgba(0,0,0,.05);
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
 
     transition:all .35s ease;
 
@@ -151,7 +150,9 @@ const cardStyle = computed(() => ({
 
     transform:translateY(-8px);
 
-    box-shadow:0 20px 60px rgba(0,0,0,.12);
+    border-color:rgba(56,189,248,.3);
+
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
 
 }
 
@@ -181,7 +182,7 @@ const cardStyle = computed(() => ({
 
     top:20px;
 
-    background:rgba(13,110,253,.08);
+    background:rgba(56,189,248,.12);
 
     color:var(--card-color);
 
@@ -192,6 +193,8 @@ const cardStyle = computed(() => ({
     font-size:.75rem;
 
     font-weight:700;
+
+    border:1px solid rgba(56,189,248,.2);
 
 }
 
@@ -209,13 +212,15 @@ const cardStyle = computed(() => ({
 
     align-items:center;
 
-    background:rgba(13,110,253,.08);
+    background:rgba(56,189,248,.12);
 
     color:var(--card-color);
 
     font-size:32px;
 
     margin-bottom:30px;
+
+    border:1px solid rgba(56,189,248,.15);
 
 }
 
@@ -231,7 +236,7 @@ const cardStyle = computed(() => ({
 
     font-weight:800;
 
-    color:#1b2940;
+    color:#f8fafc;
 
     margin-bottom:18px;
 
@@ -239,7 +244,7 @@ const cardStyle = computed(() => ({
 
 .service-content p{
 
-    color:#6c7a89;
+    color:#94a3b8;
 
     line-height:1.8;
 

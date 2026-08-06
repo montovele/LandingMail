@@ -224,7 +224,7 @@ const currentComponent = computed(() => {
 
     padding:110px 0;
 
-    background:#f8fbff;
+    background:linear-gradient(180deg, #0b1220 0%, #111827 100%);
 
 }
 
@@ -234,15 +234,19 @@ const currentComponent = computed(() => {
 
     padding:8px 18px;
 
-    background:#eef5ff;
+    background:rgba(30,41,59,.75);
 
-    color:#0d6efd;
+    border:1px solid rgba(56,189,248,.25);
+
+    color:#38bdf8;
 
     border-radius:30px;
 
     font-weight:700;
 
     margin-bottom:18px;
+
+    backdrop-filter:blur(10px);
 
 }
 
@@ -252,7 +256,7 @@ const currentComponent = computed(() => {
 
     font-weight:800;
 
-    color:#17233d;
+    color:#f8fafc;
 
 }
 
@@ -264,7 +268,7 @@ const currentComponent = computed(() => {
 
     margin-top:20px;
 
-    color:#6b7483;
+    color:#94a3b8;
 
     font-size:18px;
 
@@ -288,9 +292,9 @@ const currentComponent = computed(() => {
 
     padding:18px 35px;
 
-    border:none;
+    border:1px solid rgba(255,255,255,.08);
 
-    background:white;
+    background:#1e293b;
 
     border-radius:16px;
 
@@ -298,11 +302,13 @@ const currentComponent = computed(() => {
 
     font-weight:700;
 
-    color:#4d5b72;
+    color:#cbd5e1;
 
     transition:.3s;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+    cursor:pointer;
 
 }
 
@@ -316,13 +322,21 @@ const currentComponent = computed(() => {
 
     transform:translateY(-4px);
 
+    border-color:rgba(56,189,248,.3);
+
+    color:#38bdf8;
+
 }
 
 .tab-button.active{
 
-    background:#0d6efd;
+    background:#0284c7;
 
-    color:white;
+    color:#ffffff;
+
+    border-color:#0284c7;
+
+    box-shadow:0 15px 35px rgba(2,132,199,.4);
 
 }
 

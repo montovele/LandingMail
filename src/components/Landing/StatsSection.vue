@@ -117,12 +117,16 @@ class="col-lg-3 col-md-6"
 </section>
 
 </template>
-
 <style scoped>
 
 .stats-section{
 
 padding:80px 0;
+
+/* Fondo oscuro principal para asegurar contraste general */
+background: #0b1220;
+
+color: #f8fafc;
 
 }
 
@@ -132,15 +136,19 @@ display:inline-block;
 
 padding:8px 18px;
 
-background:#eef5ff;
+background:rgba(30,41,59,.75);
+
+border:1px solid rgba(56,189,248,.25);
 
 border-radius:30px;
 
-color:#0d6efd;
+color:#38bdf8;
 
 font-weight:700;
 
 margin-bottom:20px;
+
+backdrop-filter:blur(10px);
 
 }
 
@@ -150,7 +158,7 @@ font-size:2.5rem;
 
 font-weight:800;
 
-color:#1d2d44;
+color:#f8fafc;
 
 margin-bottom:20px;
 
@@ -158,7 +166,7 @@ margin-bottom:20px;
 
 .stats-section p{
 
-color:#667085;
+color:#94a3b8;
 
 line-height:1.8;
 
@@ -166,7 +174,7 @@ line-height:1.8;
 
 .stat-card{
 
-background:white;
+background:#1e293b;
 
 padding:45px 30px;
 
@@ -176,9 +184,9 @@ text-align:center;
 
 height:100%;
 
-border:1px solid #edf2f7;
+border:1px solid rgba(255,255,255,.08);
 
-box-shadow:0 12px 35px rgba(0,0,0,.05);
+box-shadow:0 12px 35px rgba(0,0,0,.35);
 
 transition:.35s;
 
@@ -188,7 +196,9 @@ transition:.35s;
 
 transform:translateY(-8px);
 
-box-shadow:0 20px 50px rgba(13,110,253,.12);
+border-color:rgba(56,189,248,.3);
+
+box-shadow:0 20px 50px rgba(56,189,248,.18);
 
 }
 
@@ -210,11 +220,13 @@ justify-content:center;
 
 border-radius:18px;
 
-background:#eef5ff;
+background:rgba(56,189,248,.12);
 
-color:#0d6efd;
+color:#38bdf8;
 
 font-size:34px;
+
+border:1px solid rgba(56,189,248,.2);
 
 }
 
@@ -224,7 +236,7 @@ font-size:3rem;
 
 font-weight:800;
 
-color:#0d6efd;
+color:#38bdf8;
 
 margin-bottom:10px;
 
@@ -238,7 +250,7 @@ margin:0;
 
 font-weight:600;
 
-color:#4b5563;
+color:#cbd5e1;
 
 }
 

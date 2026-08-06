@@ -149,12 +149,14 @@ Solicitar Asesoría
 </section>
 
 </template>
-
 <style scoped>
 
 .consultoria-section{
 
 padding-top:20px;
+
+/* Añadir fondo oscuro para que resalten las letras blancas */
+background: #0b1220; 
 
 }
 
@@ -164,15 +166,19 @@ display:inline-block;
 
 padding:8px 18px;
 
-background:#eef5ff;
+background:rgba(30,41,59,.75);
 
-color:#0d6efd;
+border:1px solid rgba(56,189,248,.25);
+
+color:#38bdf8;
 
 border-radius:30px;
 
 font-weight:700;
 
 margin-bottom:20px;
+
+backdrop-filter:blur(10px);
 
 }
 
@@ -184,13 +190,13 @@ font-weight:800;
 
 margin-bottom:20px;
 
-color:#1b2940;
+color:#f8fafc; /* Texto blanco/claro */
 
 }
 
 p{
 
-color:#667085;
+color:#94a3b8; /* Gris claro legible */
 
 line-height:1.8;
 
@@ -204,9 +210,21 @@ padding:45px;
 
 border-radius:20px;
 
-background:linear-gradient(135deg,#0d6efd,#0b5ed7);
+background:linear-gradient(
 
-color:white;
+    135deg,
+
+    #0f172a 0%,
+
+    #1e293b 100%
+
+);
+
+border:1px solid rgba(56,189,248,.25);
+
+box-shadow:0 20px 50px rgba(0,0,0,.4);
+
+color:#f8fafc;
 
 }
 
@@ -216,11 +234,13 @@ font-weight:700;
 
 margin-bottom:15px;
 
+color:#ffffff;
+
 }
 
 .consultoria-footer p{
 
-color:rgba(255,255,255,.85);
+color:#94a3b8;
 
 margin:0;
 
@@ -232,19 +252,27 @@ padding:15px 35px;
 
 border-radius:12px;
 
-background:white;
+background:#0284c7;
 
-color:#0d6efd;
+color:#ffffff;
 
 border:none;
 
 font-weight:700;
 
+box-shadow:0 15px 35px rgba(2,132,199,.35);
+
+transition:.3s;
+
 }
 
 .consultoria-footer .btn:hover{
 
-background:#f8f9fa;
+background:#0369a1;
+
+color:#ffffff;
+
+transform:translateY(-3px);
 
 }
 

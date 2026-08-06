@@ -1,5 +1,4 @@
 <script setup>
-
 import {
   ref,
   computed,
@@ -10,1213 +9,581 @@ import {
 import { useServicesTabs } from '../composables/useServicesTabs.js'
 
 /* ==========================================================================
- * COMPANY
+ * CONFIGURACIÓN DE EMPRESA
  * ========================================================================== */
 const company = {
-
-  name: ' HENCOM',
-
-  shortName: '',
-
+  name: 'HENCOM',
+  shortName: 'HENCOM',
   logo: '/images/hencom.PNG',
-
   showLogo: true,
-
   hideTextWhenLogo: true
-
 }
-/*
-|--------------------------------------------------------------------------
-| COMPANY
-|--------------------------------------------------------------------------
-*/
-
-const showCompanyText = computed(() => {
-
-  return !(
-
-    company.showIcon &&
-
-    company.hideTextWhenIcon
-
-  )
-
-})
-
-/* ==========================================================================
- * SERVICES
- * ========================================================================== */
-
-const {
-
-  activeTab,
-
-  setActiveTab
-
-} = useServicesTabs()
-
-/* ==========================================================================
- * NAVBAR STATE
- * ========================================================================== */
-
-const mobileMenuOpen = ref(false)
-
-const openDropdown = ref(null)
-
-const navbarRef = ref(null)
-
-/* ==========================================================================
- * MENU
- * ========================================================================== */
-    
-const menuItems = [
-
-  {
-
-    id: 'home',
-
-    label: 'Inicio',
-
-    href: '#home-section'
-
-  },
-
-  {
-
-    id: 'services',
-
-    label: 'Servicios',
-
-    children: [
-
-      {
-
-        id: 'consultoria',
-
-        label: 'Consultoría'
-
-      },
-
-      {
-
-        id: 'soluciones',
-
-        label: 'Soluciones'
-
-      },
-
-      {
-
-        id: 'nosotros',
-
-        label: 'Nosotros'
-
-      }
-
-    ]
-
-  }
-
-]
 
 /* ==========================================================================
  * COMPUTED
  * ========================================================================== */
-
-const hasOpenDropdown = computed(() =>
-
-  openDropdown.value !== null
-
-)
+const showCompanyText = computed(() => {
+  if (company.showLogo && company.hideTextWhenLogo) {
+    return false
+  }
+  return true
+})
 
 /* ==========================================================================
- * SCROLL
+ * NAVEGACIÓN Y PESTAÑAS
  * ========================================================================== */
+const { activeTab, setActiveTab } = useServicesTabs()
 
+const mobileMenuOpen = ref(false)
+const openDropdown = ref(null)
+const navbarRef = ref(null)
+
+const menuItems = [
+  {
+    id: 'home',
+    label: 'Inicio',
+    href: '#home-section'
+  },
+  {
+    id: 'services',
+    label: 'Servicios',
+    children: [
+      { id: 'consultoria', label: 'Consultoría' },
+      { id: 'soluciones', label: 'Soluciones' },
+      { id: 'nosotros', label: 'Nosotros' }
+    ]
+  }
+]
+
+/* ==========================================================================
+ * MÉTODOS DE NAVEGACIÓN
+ * ========================================================================== */
 const scrollTo = (selector) => {
-
-  if (!selector)
-    return
-
+  if (!selector) return
   const element = document.querySelector(selector)
-
-  if (!element)
-    return
+  if (!element) return
 
   element.scrollIntoView({
-
     behavior: 'smooth',
-
     block: 'start'
-
   })
-
 }
-
-/* ==========================================================================
- * NAVIGATION
- * ========================================================================== */
 
 const navigate = (href) => {
-
-    console.log(
-        'Antes:',
-        activeTab.value
-    )
-
-    if (href === '#home-section') {
-
-        setActiveTab('home')
-
-    }
-
-    console.log(
-        'Después:',
-        activeTab.value
-    )
-
-    closeAllMenus()
-
-    scrollTo(href)
-
+  if (href === '#home-section') {
+    setActiveTab('home')
+  }
+  closeAllMenus()
+  scrollTo(href)
 }
-/* ==========================================================================
- * SERVICES
- * ========================================================================== */
 
 const goToService = (serviceId) => {
-
-    if (activeTab.value !== serviceId) {
-
-        setActiveTab(serviceId)
-
-    }
-
-    closeAllMenus()
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: 'smooth'
-
-    })
-
+  if (activeTab.value !== serviceId) {
+    setActiveTab(serviceId)
+  }
+  closeAllMenus()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 }
 
 /* ==========================================================================
- * DROPDOWNS
+ * CONTROL DE DESPLEGABLES Y MENÚ MÓVIL
  * ========================================================================== */
-
 const toggleDropdown = (dropdownId) => {
-
-  openDropdown.value =
-
-    openDropdown.value === dropdownId
-
-      ? null
-
-      : dropdownId
-
+  openDropdown.value = openDropdown.value === dropdownId ? null : dropdownId
 }
-
-const closeDropdown = () => {
-
-  openDropdown.value = null
-
-}
-
-/* ==========================================================================
- * MOBILE
- * ========================================================================== */
-
-const toggleMobileMenu = () => {
-
-  mobileMenuOpen.value =
-
-    !mobileMenuOpen.value
-
-}
-
-const closeMobileMenu = () => {
-
-  mobileMenuOpen.value = false
-
-}
-
-/* ==========================================================================
- * CLOSE EVERYTHING
- * ========================================================================== */
 
 const closeAllMenus = () => {
+  openDropdown.value = null
+  mobileMenuOpen.value = false
+}
 
-  closeDropdown()
-
-  closeMobileMenu()
-
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value
 }
 
 /* ==========================================================================
- * CLICK OUTSIDE
+ * EVENTOS GLOBALES (CLICK OUTSIDE & ESC)
  * ========================================================================== */
-
 const handleOutsideClick = (event) => {
-
-  if (!navbarRef.value)
-    return
-
-  if (
-
-    !navbarRef.value.contains(event.target)
-
-  ) {
-
+  if (navbarRef.value && !navbarRef.value.contains(event.target)) {
     closeAllMenus()
-
   }
-
 }
-
-/* ==========================================================================
- * ESC KEY
- * ========================================================================== */
 
 const handleEscape = (event) => {
-
-  if (
-
-    event.key === 'Escape'
-
-  ) {
-
+  if (event.key === 'Escape') {
     closeAllMenus()
-
   }
-
 }
 
-/* ==========================================================================
- * LIFECYCLE
- * ========================================================================== */
-
 onMounted(() => {
-
-  document.addEventListener(
-
-    'click',
-
-    handleOutsideClick
-
-  )
-
-  document.addEventListener(
-
-    'keydown',
-
-    handleEscape
-
-  )
-
+  document.addEventListener('click', handleOutsideClick)
+  document.addEventListener('keydown', handleEscape)
 })
 
 onBeforeUnmount(() => {
-
-  document.removeEventListener(
-
-    'click',
-
-    handleOutsideClick
-
-  )
-
-  document.removeEventListener(
-
-    'keydown',
-
-    handleEscape
-
-  )
-
+  document.removeEventListener('click', handleOutsideClick)
+  document.removeEventListener('keydown', handleEscape)
 })
-
 </script>
+
 <template>
-
-<nav
-    ref="navbarRef"
-    class="site-nav"
->
-
+  <nav ref="navbarRef" class="site-nav">
     <div class="container">
+      <div class="site-navigation">
+        <!-- ===================================================== -->
+        <!-- LOGO -->
+        <!-- ===================================================== -->
+        <a href="#" class="logo" @click.prevent="navigate('#home-section')">
+          <img
+            v-if="company.showLogo"
+            :src="company.logo"
+            :alt="company.name"
+            class="logo-image"
+          />
+          <template v-if="showCompanyText">
+            <span class="logo-text">{{ company.shortName }}</span>
+            <span class="logo-divider">|</span>
+            <span class="logo-company">{{ company.name }}</span>
+          </template>
+        </a>
 
-        <div class="site-navigation">
+        <!-- ===================================================== -->
+        <!-- DESKTOP MENU -->
+        <!-- ===================================================== -->
+        <ul class="site-menu desktop-menu">
+          <li v-for="item in menuItems" :key="item.id" class="menu-item">
+            <!-- LINK NORMAL -->
+            <template v-if="!item.children">
+              <a
+                :href="item.href"
+                class="nav-link"
+                @click.prevent="navigate(item.href)"
+              >
+                <span class="nav-link-text">{{ item.label }}</span>
+              </a>
+            </template>
 
-            <!-- ===================================================== -->
-            <!-- LOGO -->
-            <!-- ===================================================== -->
-
-<a
-    href="#"
-    class="logo"
-    @click.prevent="navigate('#home-section')"
->
-
-    <img
-        v-if="company.showLogo"
-        :src="company.logo"
-        :alt="company.name"
-        class="logo-image"
-    >
-
-    <template v-if="showCompanyText">
-
-        <span class="logo-text">
-
-            {{ company.shortName }}
-
-        </span>
-
-        <span class="logo-divider">
-
-            |
-
-        </span>
-
-        <span class="logo-company">
-
-            {{ company.name }}
-
-        </span>
-
-    </template>
-
-</a>
-
-            <!-- ===================================================== -->
-            <!-- DESKTOP MENU -->
-            <!-- ===================================================== -->
-
-            <ul class="site-menu desktop-menu">
-
-                <li
-                    v-for="item in menuItems"
-                    :key="item.id"
-                    class="menu-item"
-                >
-
-                    <!-- ============================================== -->
-                    <!-- NORMAL LINK -->
-                    <!-- ============================================== -->
-
-                    <template v-if="!item.children">
-
-                        <a
-                            :href="item.href"
-                            class="nav-link"
-                            @click.prevent="navigate(item.href)"
-                        >
-                        <span class="nav-link-text">
-                          {{ item.label }}
-
-                        </span>
-
-
-                        </a>
-
-                    </template>
-
-                    <!-- ============================================== -->
-                    <!-- DROPDOWN -->
-                    <!-- ============================================== -->
-
-                    <template v-else>
-
-                        <button
-                            class="nav-link dropdown-trigger"
-                            type="button"
-                            :aria-expanded="openDropdown === item.id"
-                            @click.stop="toggleDropdown(item.id)"
-                        >
-
-                            {{ item.label }}
-
-                            <i
-                                class="icon-chevron-down"
-                                :class="{
-
-                                    rotate:
-
-                                        openDropdown === item.id
-
-                                }"
-                            />
-
-                        </button>
-
-                        <Transition
-                            name="dropdown"
-                        >
-
-                            <div
-                                v-if="openDropdown === item.id"
-                                class="dropdown-panel"
-                            >
-
-                                <button
-                                    v-for="service in item.children"
-                                    :key="service.id"
-                                    type="button"
-                                    class="dropdown-item"
-                                    :class="{
-
-                                        active:
-
-                                            activeTab === service.id
-
-                                    }"
-                                    @click="goToService(service.id)"
-                                >
-
-                                    {{ service.label }}
-
-                                </button>
-
-                            </div>
-
-                        </Transition>
-
-                    </template>
-
-                </li>
-
-                <!-- ============================================== -->
-                <!-- CTA -->
-                <!-- ============================================== -->
-
-                <li>
-
-                    <button
-                        class="btn btn-primary nav-btn"
-                        @click="navigate('#contact-section')"
-                    >
-
-                        Solicitar Asesoría
-
-                    </button>
-
-                </li>
-
-            </ul>
-
-            <!-- ===================================================== -->
-            <!-- MOBILE BUTTON -->
-            <!-- ===================================================== -->
-
-            <button
-                class="mobile-toggle"
+            <!-- DROPDOWN -->
+            <template v-else>
+              <button
+                class="nav-link dropdown-trigger"
                 type="button"
-                @click="toggleMobileMenu"
+                :aria-expanded="openDropdown === item.id"
+                @click.stop="toggleDropdown(item.id)"
+              >
+                <span class="nav-link-text">{{ item.label }}</span>
+                <i
+                  class="icon-chevron-down"
+                  :class="{ rotate: openDropdown === item.id }"
+                >
+                  ▼
+                </i>
+              </button>
+
+              <Transition name="dropdown">
+                <div v-if="openDropdown === item.id" class="dropdown-panel">
+                  <button
+                    v-for="service in item.children"
+                    :key="service.id"
+                    type="button"
+                    class="dropdown-item"
+                    :class="{ active: activeTab === service.id }"
+                    @click="goToService(service.id)"
+                  >
+                    {{ service.label }}
+                  </button>
+                </div>
+              </Transition>
+            </template>
+          </li>
+
+          <!-- CTA BUTTON -->
+          <li>
+            <button
+              class="nav-btn"
+              @click="navigate('#contact-section')"
             >
-
-                <span
-                    v-if="!mobileMenuOpen"
-                >
-
-                    ☰
-
-                </span>
-
-                <span
-                    v-else
-                >
-
-                    ✕
-
-                </span>
-
+              Solicitar Asesoría
             </button>
+          </li>
+        </ul>
 
-        </div>
-
+        <!-- ===================================================== -->
+        <!-- MOBILE TOGGLE -->
+        <!-- ===================================================== -->
+        <button
+          class="mobile-toggle"
+          type="button"
+          @click="toggleMobileMenu"
+          aria-label="Abrir Menú"
+        >
+          <span v-if="!mobileMenuOpen">☰</span>
+          <span v-else>✕</span>
+        </button>
+      </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- MOBILE MENU -->
+    <!-- MOBILE MENU PANEL -->
     <!-- ========================================================= -->
+    <Transition name="mobile-menu">
+      <div v-if="mobileMenuOpen" class="mobile-menu">
+        <template v-for="item in menuItems" :key="item.id">
+          <!-- NORMAL LINK -->
+          <button
+            v-if="!item.children"
+            class="mobile-link"
+            @click="navigate(item.href)"
+          >
+            {{ item.label }}
+          </button>
 
-    <Transition
-        name="mobile-menu"
-    >
-
-        <div
-            v-if="mobileMenuOpen"
-            class="mobile-menu"
-        >
-
-            <template
-                v-for="item in menuItems"
-                :key="item.id"
-            >
-
-                <!-- NORMAL -->
-
-                <button
-                    v-if="!item.children"
-                    class="mobile-link"
-                    @click="navigate(item.href)"
-                >
-
-                    {{ item.label }}
-
-                </button>
-
-                <!-- DROPDOWN -->
-
-                <div
-                    v-else
-                    class="mobile-dropdown"
-                >
-
-                    <button
-                        class="mobile-link"
-
-                        @click="toggleDropdown(item.id)"
-                    >
-
-                        {{ item.label }}
-
-                        <i
-                            class="icon-chevron-down"
-                            :class="{
-
-                                rotate:
-
-                                    openDropdown === item.id
-
-                            }"
-                        />
-
-                    </button>
-
-                    <Transition
-                        name="dropdown"
-                    >
-
-                        <div
-                            v-if="openDropdown === item.id"
-                            class="mobile-dropdown-items"
-                        >
-
-                            <button
-                                v-for="service in item.children"
-                                :key="service.id"
-                                class="mobile-subitem"
-                                :class="{
-
-                                    active:
-
-                                        activeTab === service.id
-
-                                }"
-                                @click="goToService(service.id)"
-                            >
-
-                                {{ service.label }}
-
-                            </button>
-
-                        </div>
-
-                    </Transition>
-
-                </div>
-
-            </template>
-
-            <button
-                class="btn btn-primary mobile-cta"
-                @click="navigate('#contact-section')"
-            >
-
-                Solicitar Asesoría
-
+          <!-- DROPDOWN LINK -->
+          <div v-else class="mobile-dropdown">
+            <button class="mobile-link" @click="toggleDropdown(item.id)">
+              <span>{{ item.label }}</span>
+              <i
+                class="icon-chevron-down"
+                :class="{ rotate: openDropdown === item.id }"
+              >
+                ▼
+              </i>
             </button>
 
-        </div>
+            <Transition name="dropdown">
+              <div v-if="openDropdown === item.id" class="mobile-dropdown-items">
+                <button
+                  v-for="service in item.children"
+                  :key="service.id"
+                  class="mobile-subitem"
+                  :class="{ active: activeTab === service.id }"
+                  @click="goToService(service.id)"
+                >
+                  {{ service.label }}
+                </button>
+              </div>
+            </Transition>
+          </div>
+        </template>
 
+        <button
+          class="nav-btn mobile-cta"
+          @click="navigate('#contact-section')"
+        >
+          Solicitar Asesoría
+        </button>
+      </div>
     </Transition>
-
-</nav>
-
+  </nav>
 </template>
 
 <style scoped>
 /* ==========================================================
-   VARIABLES
+   VARIABLES Y ESTILOS BASE DARK MODE
 ========================================================== */
-
-:root {
-
-  --nav-height: 82px;
-
-  --primary: #1d4ed8;
-  --primary-dark: #1e3a8a;
-
-  --secondary: #0f172a;
-
-  --text: #334155;
-  --text-light: #64748b;
-
-  --border: #e2e8f0;
-
-  --background: rgba(255,255,255,.96);
-
-  --shadow:
-
-    0 12px 40px rgba(15,23,42,.08);
-
-  --shadow-dropdown:
-
-    0 25px 50px rgba(15,23,42,.12);
-
-  --radius: 16px;
-
-  --transition: .28s ease;
-
-}
-
-/* ==========================================================
-   NAVBAR
-========================================================== */
-
 .site-nav {
+  --nav-height: 82px;
+  --bg-dark: rgba(11, 18, 32, 0.88);
+  --bg-panel: #1e293b;
+  --primary-cyan: #38bdf8;
+  --primary-blue: #0284c7;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-light: rgba(255, 255, 255, 0.08);
 
   position: sticky;
-
   top: 0;
-
   z-index: 9999;
-
-  backdrop-filter: blur(18px);
-
-  background: var(--background);
-
-  border-bottom: 1px solid rgba(226,232,240,.65);
-
-  transition: all .35s ease;
-
+  background: var(--bg-dark);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
 }
 
-.site-navigation{
-
+.site-navigation {
   height: var(--nav-height);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* ==========================================================
    LOGO
 ========================================================== */
-
-.logo{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  text-decoration:none;
-  border-radius: 20px;
-
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  border-radius: 12px;
 }
 
-.logo-text{
-
-  font-size:28px;
-
-  font-weight:800;
-
-  color:var(--primary);
-
-  letter-spacing:1px;
-
+.logo-image {
+  max-width: 178px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
 }
 
-.logo-divider{
-
-  color:#CBD5E1;
-
+.logo-text {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary-cyan);
+  letter-spacing: 0.5px;
 }
 
-.logo-company{
+.logo-divider {
+  color: #334155;
+  font-size: 20px;
+}
 
-  color:var(--secondary);
-
-  font-size:15px;
-
-  font-weight:600;
-    border-radius: 20px;
-
-
+.logo-company {
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 600;
 }
 
 /* ==========================================================
-   MENU
+   MENU DESKTOP
 ========================================================== */
-
-.site-menu{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  margin:0;
-
-  padding:0;
-
-  list-style:none;
-
+.site-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.menu-item{
+.menu-item {
+  position: relative;
+}
 
-  position:relative;
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
 
+.nav-link-text {
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link:hover .nav-link-text {
+  color: var(--primary-cyan);
+}
+
+/* CHEVRON */
+.icon-chevron-down {
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+.icon-chevron-down.rotate {
+  transform: rotate(180deg);
 }
 
 /* ==========================================================
-   LINKS
+   DROPDOWN PANEL
 ========================================================== */
-
-.nav-link{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  padding:14px 18px;
-
-  border:none;
-
-  background:none;
-
-  color:var(back);
-
-  font-weight:600;
-
-  cursor:pointer;
-
-  border-radius:10px;
-
-  transition:var(--transition);
-
-  text-decoration:none;
-
+.dropdown-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 240px;
+  background: var(--bg-panel);
+  border-radius: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  padding: 8px;
 }
 
-.nav-link:hover{
-
-  background:#f8fafc;
-
-  color:var(--primary);
-
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 10px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.dropdown-trigger{
+.dropdown-item:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--primary-cyan);
+}
 
-  appearance:none;
-
+.dropdown-item.active {
+  background: linear-gradient(135deg, var(--primary-blue), #0369a1);
+  color: #ffffff;
+  font-weight: 700;
 }
 
 /* ==========================================================
-   CHEVRON
+   BOTÓN CTA
 ========================================================== */
-
-.icon-chevron-down{
-
-  font-size:12px;
-
-  transition:.25s;
-
+.nav-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary-blue), #0284c7);
+  box-shadow: 0 8px 25px rgba(2, 132, 199, 0.35);
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.icon-chevron-down.rotate{
-
-  transform:rotate(180deg);
-
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(2, 132, 199, 0.5);
+  background: linear-gradient(135deg, #0284c7, #0369a1);
 }
 
 /* ==========================================================
-   DROPDOWN
+   MOBILE TOGGLE & MENU
 ========================================================== */
+.mobile-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 26px;
+  color: var(--text-main);
+  padding: 8px;
+}
 
-.dropdown-panel{
+.mobile-menu {
+  background: #0f172a;
+  border-top: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  padding: 20px;
+}
 
-  position:absolute;
+.mobile-link {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border: none;
+  background: var(--bg-panel);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-main);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
 
-  top:calc(100% + 12px);
+.mobile-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
 
-  left:0;
+.mobile-dropdown-items {
+  padding-left: 12px;
+  margin-bottom: 12px;
+}
 
-  min-width:260px;
+.mobile-subitem {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
 
-  background:white;
+.mobile-subitem:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--primary-cyan);
+}
 
-  border-radius:18px;
+.mobile-subitem.active {
+  background: var(--primary-blue);
+  color: #ffffff;
+}
 
-  border:1px solid var(--border);
-
-  box-shadow:var(--shadow-dropdown);
-
-  overflow:hidden;
-
-  padding:10px;
-
+.mobile-cta {
+  width: 100%;
+  margin-top: 15px;
 }
 
 /* ==========================================================
-   DROPDOWN ITEMS
+   ANIMACIONES
 ========================================================== */
-
-.dropdown-item{
-
-  width:100%;
-
-  display:flex;
-
-  align-items:center;
-
-  padding:14px 16px;
-
-  border:none;
-
-  background:white;
-
-  cursor:pointer;
-
-  color:var(--text);
-
-  border-radius:12px;
-
-  text-align:left;
-
-  font-size:15px;
-
-  font-weight:500;
-
-  transition:var(--transition);
-
-}
-
-.dropdown-item:hover{
-
-  background:#eff6ff;
-
-  color:var(--primary);
-
-}
-
-.dropdown-item.active{
-
-  background:linear-gradient(
-
-      135deg,
-
-      #2563eb,
-
-      #1d4ed8
-
-  );
-
-  color:white;
-
-}
-
-/* ==========================================================
-   CTA
-========================================================== */
-
-.nav-btn{
-
-  padding:14px 24px;
-
-  border-radius:14px;
-
-  font-weight:700;
-
-  border:none;
-
-  color:white;
-
-  background:linear-gradient(
-
-      135deg,
-
-      #2563eb,
-
-      #1d4ed8
-
-  );
-
-  box-shadow:
-
-      0 10px 30px rgba(37,99,235,.28);
-
-  transition:.25s;
-
-}
-
-.nav-btn:hover{
-
-  transform:translateY(-2px);
-
-  box-shadow:
-
-      0 18px 36px rgba(37,99,235,.35);
-
-}
-
-/* ==========================================================
-   MOBILE BUTTON
-========================================================== */
-
-.mobile-toggle{
-
-  display:none;
-
-  border:none;
-
-  background:none;
-
-  cursor:pointer;
-
-  font-size:28px;
-
-  color:var(--secondary);
-
-}
-
-/* ==========================================================
-   MOBILE MENU
-========================================================== */
-
-.mobile-menu{
-
-  background:white;
-
-  border-top:1px solid var(--border);
-
-  box-shadow:var(--shadow);
-
-  padding:20px;
-
-}
-
-.mobile-link{
-
-  width:100%;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:16px;
-
-  border:none;
-
-  background:white;
-
-  cursor:pointer;
-
-  font-weight:600;
-
-  color:var(--secondary);
-
-  border-radius:12px;
-
-  transition:.25s;
-
-}
-
-.mobile-link:hover{
-
-  background:#f8fafc;
-
-}
-
-.mobile-dropdown{
-
-  margin-bottom:10px;
-
-}
-
-.mobile-dropdown-items{
-
-  padding-left:18px;
-
-  margin-top:8px;
-
-}
-
-.mobile-subitem{
-
-  width:100%;
-
-  padding:12px 16px;
-
-  border:none;
-
-  background:white;
-
-  text-align:left;
-
-  cursor:pointer;
-
-  border-radius:10px;
-
-  color:var(--text-light);
-
-  transition:.25s;
-
-}
-
-.mobile-subitem:hover{
-
-  background:#eff6ff;
-
-  color:var(--primary);
-
-}
-
-.mobile-subitem.active{
-
-  color:white;
-
-  background:var(--primary);
-
-}
-
-.mobile-cta{
-
-  margin-top:20px;
-
-  width:100%;
-
-}
-
-/* ==========================================================
-   ANIMATIONS
-========================================================== */
-
 .dropdown-enter-active,
-
-.dropdown-leave-active{
-
-  transition:.25s;
-
+.dropdown-leave-active {
+  transition: all 0.25s ease;
 }
 
 .dropdown-enter-from,
-
-.dropdown-leave-to{
-
-  opacity:0;
-
-  transform:translateY(-10px);
-
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 .mobile-menu-enter-active,
-
-.mobile-menu-leave-active{
-
-  transition:.35s;
-
+.mobile-menu-leave-active {
+  transition: all 0.3s ease;
 }
 
 .mobile-menu-enter-from,
-
-.mobile-menu-leave-to{
-
-  opacity:0;
-
-  transform:translateY(-15px);
-
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-12px);
 }
 
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
+@media (max-width: 991px) {
+  .site-menu {
+    display: none;
+  }
 
-@media (max-width:991px){
-
-.site-menu{
-
-    display:none;
-
-}
-
-.mobile-toggle{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-.logo-company{
-
-    display:none;
-
-}
-
-.logo-divider{
-
-    display:none;
-
-}
-
-}
-.logo {
-
+  .mobile-toggle {
     display: flex;
-
     align-items: center;
+    justify-content: center;
+  }
 
-    gap: 12px;
-
-    text-decoration: none;
-      border-radius: 20px;
-
-}
-
-.logo-image {
-
-    width: 178px;
-
-    height: 48px;
-
-    object-fit: contain;
-
-    display: block;
-    border-radius: 20px;
-}
-
-.nav-link-text{
-  color: #0f172a;
+  .logo-company,
+  .logo-divider {
+    display: none;
+  }
 }
 </style>

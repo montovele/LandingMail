@@ -231,12 +231,19 @@ const infraestructura = [
 </section>
 
 </template>
-
 <style scoped>
 
 .solutions{
 
 padding-top:20px;
+
+/* Añadido fondo oscuro para dar contraste a los textos claros */
+background: #0b1220;
+
+/* Aseguramos relleno adecuado y color base */
+padding-bottom: 50px;
+
+color: #f8fafc;
 
 }
 
@@ -254,11 +261,11 @@ font-weight:800;
 
 margin-bottom:35px;
 
-color:#1d2d44;
+color:#f8fafc;
 
 padding-left:15px;
 
-border-left:5px solid #0d6efd;
+border-left:5px solid #38bdf8;
 
 }
 
@@ -268,15 +275,19 @@ display:inline-block;
 
 padding:8px 18px;
 
-background:#eef5ff;
+background:rgba(30,41,59,.75);
+
+border:1px solid rgba(56,189,248,.25);
 
 border-radius:30px;
 
-color:#0d6efd;
+color:#38bdf8;
 
 font-weight:700;
 
 margin-bottom:20px;
+
+backdrop-filter:blur(10px);
 
 }
 
@@ -288,9 +299,21 @@ padding:50px;
 
 border-radius:20px;
 
-background:#0d6efd;
+background:linear-gradient(
 
-color:white;
+    135deg,
+
+    #0f172a 0%,
+
+    #1e293b 100%
+
+);
+
+border:1px solid rgba(56,189,248,.25);
+
+box-shadow:0 20px 50px rgba(0,0,0,.4);
+
+color:#f8fafc;
 
 }
 
@@ -300,11 +323,13 @@ font-weight:700;
 
 margin-bottom:20px;
 
+color:#ffffff;
+
 }
 
 .solution-banner p{
 
-color:rgba(255,255,255,.85);
+color:#94a3b8;
 
 }
 

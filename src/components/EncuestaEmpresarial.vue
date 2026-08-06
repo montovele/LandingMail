@@ -174,13 +174,6 @@ const pages = [
         ]
       }
     ]
-  },
-  {
-    key: "resumen",
-    title: "Resumen",
-    icon: "bi bi-check-circle",
-    description: "Revisión final de respuestas.",
-    sections: []
   }
 ];
 
@@ -368,9 +361,10 @@ async function submitSurvey() {
     <section class="page-body" :key="currentPage">
       <div class="page-content">
         <div class="page-title">
-          <div class="page-icon">
-            <i :class="currentBookPage.icon"></i>
-          </div>
+<div class="page-icon">
+  <!-- Con valor por defecto usando FontAwesome (ej. fa-solid fa-file-lines) -->
+  <i :class="currentBookPage?.icon || 'fa-solid fa-file-lines'"></i>
+</div>
           <div>
             <h3>{{ currentBookPage.title }}</h3>
             <p>{{ currentBookPage.description }}</p>
@@ -804,14 +798,27 @@ async function submitSurvey() {
 .survey-book .page-icon {
   width: 60px;
   height: 60px;
+  min-width: 60px;
   border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(37, 99, 235, 0.08);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  color: var(--sb-primary) !important;
+  /* Fondo cian traslúcido para modo oscuro */
+  background: rgba(56, 189, 248, 0.12);
+  /* Borde brillante translúcido */
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  /* Color del ícono cian brillante */
+  color: #38bdf8 !important;
   font-size: 28px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover suave */
+.survey-book .page-icon:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
 }
 
 .survey-book .page-title h3 {
