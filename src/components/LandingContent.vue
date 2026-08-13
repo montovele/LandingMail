@@ -1,7 +1,6 @@
 <script setup>
 
 import LandingRouter from './LandingRouter.vue'
-import Contact from './Contact.vue'
 
 </script>
 
@@ -10,8 +9,6 @@ import Contact from './Contact.vue'
 <section class="landing-content">
 
     <LandingRouter />
-
-    <Contact />
 
 </section>
 

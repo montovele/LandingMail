@@ -21,6 +21,10 @@ const pages = {
 
     nosotros: defineAsyncComponent(() =>
         import('./Landing/TabNosotros.vue')
+    ),
+
+    contacto: defineAsyncComponent(() =>
+        import('./ContactPage.vue')
     )
 
 }

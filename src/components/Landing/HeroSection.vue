@@ -2,6 +2,18 @@
 
 import { computed } from "vue"
 
+import { useServicesTabs } from '../../composables/useServicesTabs'
+
+const { setActiveTab } = useServicesTabs()
+
+const navigateToContact = () => {
+  setActiveTab('contacto')
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
+
 /* ============================================================
  * EMPRESA
  * ============================================================ */
@@ -37,7 +49,7 @@ const hero = {
 
         label: "Solicitar Asesoría",
 
-        href: "#contact-section"
+        action: navigateToContact
 
     },
 
@@ -390,14 +402,15 @@ const keywords = [
 
                     <div class="hero-buttons">
 
-                        <a
-                            :href="hero.primaryButton.href"
+                        <button
+                            @click="navigateToContact"
+                            type="button"
                             class="btn btn-primary btn-lg"
                         >
 
                             {{ hero.primaryButton.label }}
 
-                        </a>
+                        </button>
 
                         <!-- <a
                             :href="hero.secondaryButton.href"

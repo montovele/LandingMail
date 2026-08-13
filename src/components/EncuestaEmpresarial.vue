@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, nextTick } from "vue";
 import { useDiagnostico } from "../composables/useDiagnostico";
 
 // =====================================================
@@ -36,15 +36,9 @@ function createInitialSurvey() {
       nivelServicio: ""
     },
 
-    pequena: {
-      detallePequena: ""
-    },
-
-    mediana: {
-      detalleMediana: ""
-    },
-
-    grande: {
+    requisitosTamanio: {
+      detallePequena: "",
+      detalleMediana: "",
       detalleGrande: ""
     }
   };
@@ -128,49 +122,41 @@ const pages = [
     ]
   },
   {
-    key: "pequena",
-    title: "Pequeña",
-    icon: "bi bi-shop",
-    description: "Evaluación para pequeña empresa.",
+    key: "requisitosTamanio",
+    title: "Requerimientos",
+    icon: "bi bi-bar-chart",
+    description: "Especifica los requerimientos según el tamaño de tu empresa.",
     sections: [
       {
-        id: "secPequena",
-        title: "Requerimientos Pequeña Empresa",
-        icon: "bi bi-box",
-        questions: [
-          { id: "detallePequena", label: "Detalles o requerimientos de infraestructura", type: "textarea" }
-        ]
-      }
-    ]
-  },
-  {
-    key: "mediana",
-    title: "Mediana",
-    icon: "bi bi-buildings",
-    description: "Evaluación para mediana empresa.",
-    sections: [
-      {
-        id: "secMediana",
-        title: "Requerimientos Mediana Empresa",
-        icon: "bi bi-boxes",
-        questions: [
-          { id: "detalleMediana", label: "Detalles o requerimientos de infraestructura", type: "textarea" }
-        ]
-      }
-    ]
-  },
-  {
-    key: "grande",
-    title: "Grande",
-    icon: "bi bi-building-fill",
-    description: "Evaluación para gran empresa.",
-    sections: [
-      {
-        id: "secGrande",
-        title: "Requerimientos Gran Empresa",
-        icon: "bi bi-layers",
-        questions: [
-          { id: "detalleGrande", label: "Detalles o requerimientos de infraestructura", type: "textarea" }
+        id: "requisitosPequena",
+        type: "company-size",
+        title: "Requerimientos por Tamaño de Empresa",
+        icon: "bi bi-diagram-3",
+        companies: [
+          {
+            size: "pequena",
+            sizeLabel: "Pequeña Empresa",
+            icon: "bi bi-shop",
+            description: "Hasta 50 empleados",
+            questionId: "detallePequena",
+            label: "Requerimientos de Infraestructura"
+          },
+          {
+            size: "mediana",
+            sizeLabel: "Mediana Empresa",
+            icon: "bi bi-buildings",
+            description: "51 - 250 empleados",
+            questionId: "detalleMediana",
+            label: "Requerimientos de Infraestructura"
+          },
+          {
+            size: "grande",
+            sizeLabel: "Gran Empresa",
+            icon: "bi bi-building-fill",
+            description: "Más de 250 empleados",
+            questionId: "detalleGrande",
+            label: "Requerimientos de Infraestructura"
+          }
         ]
       }
     ]
@@ -196,17 +182,37 @@ function getModel(pageKey) {
   return encuesta[pageKey] || {};
 }
 
+function scrollToBook() {
+  // Usar nextTick para asegurar que el DOM está actualizado
+  nextTick(() => {
+    const bookContainer = document.querySelector('.book-container')
+    if (bookContainer) {
+      bookContainer.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  })
+}
+
 function nextPage() {
-  if (!isLastPage.value) currentPage.value++;
+  if (!isLastPage.value) {
+    currentPage.value++
+    scrollToBook()
+  }
 }
 
 function previousPage() {
-  if (!isFirstPage.value) currentPage.value--;
+  if (!isFirstPage.value) {
+    currentPage.value--
+    scrollToBook()
+  }
 }
 
 function goToPage(index) {
   if (index >= 0 && index < pages.length) {
-    currentPage.value = index;
+    currentPage.value = index
+    scrollToBook()
   }
 }
 
@@ -265,9 +271,7 @@ function buildPayload() {
     metadata: encuesta.metadata,
     formulario: encuesta.formulario,
     nivelServicio: encuesta.nivelServicio,
-    pequena: encuesta.pequena,
-    mediana: encuesta.mediana,
-    grande: encuesta.grande
+    requisitosTamanio: encuesta.requisitosTamanio
   };
 }
 
@@ -376,114 +380,162 @@ async function submitSurvey() {
             
             <!-- SECCIONES DE FORMULARIO DINÁMICO -->
             <template v-for="section in currentSections" :key="section.id">
-              <div class="card-box section-card mb-4">
-                <div class="card-title">
-                  <i :class="section.icon"></i>
-                  <span>{{ section.title }}</span>
-                </div>
+              <!-- TARJETAS DE TAMAÑO DE EMPRESA -->
+              <template v-if="section.type === 'company-size'">
+                <div class="company-size-section">
+                  <div class="section-header mb-4">
+                    <i :class="section.icon" class="section-header-icon"></i>
+                    <div>
+                      <h4 class="section-title-main">{{ section.title }}</h4>
+                      <p class="section-subtitle">Seleccione e indique los requerimientos según el tamaño de su empresa</p>
+                    </div>
+                  </div>
 
-                <div v-for="question in section.questions" :key="question.id" class="form-group">
-                  <label class="form-label">
-                    {{ question.label }}
-                    <span v-if="question.required">*</span>
-                  </label>
-
-                  <!-- TEXT -->
-                  <input
-                    v-if="question.type === 'text'"
-                    v-model="getModel(currentBookPage.key)[question.id]"
-                    type="text"
-                    class="form-control"
-                    :placeholder="getPlaceholder(question)"
-                  />
-
-                  <!-- EMAIL -->
-                  <input
-                    v-else-if="question.type === 'email'"
-                    v-model="getModel(currentBookPage.key)[question.id]"
-                    type="email"
-                    class="form-control"
-                    :placeholder="getPlaceholder(question)"
-                  />
-
-                  <!-- TEL -->
-                  <input
-                    v-else-if="question.type === 'tel'"
-                    v-model="getModel(currentBookPage.key)[question.id]"
-                    type="tel"
-                    class="form-control"
-                    :placeholder="getPlaceholder(question)"
-                  />
-
-                  <!-- NUMBER -->
-                  <input
-                    v-else-if="question.type === 'number'"
-                    v-model.number="getModel(currentBookPage.key)[question.id]"
-                    type="number"
-                    class="form-control"
-                    :placeholder="getPlaceholder(question)"
-                  />
-
-                  <!-- DATE -->
-                  <input
-                    v-else-if="question.type === 'date'"
-                    v-model="getModel(currentBookPage.key)[question.id]"
-                    type="date"
-                    class="form-control"
-                  />
-
-                  <!-- TIME -->
-                  <input
-                    v-else-if="question.type === 'time'"
-                    v-model="getModel(currentBookPage.key)[question.id]"
-                    type="time"
-                    class="form-control"
-                  />
-
-                  <!-- TEXTAREA -->
-                  <textarea
-                    v-else-if="question.type === 'textarea'"
-                    v-model="getModel(currentBookPage.key)[question.id]"
-                    class="form-control"
-                    rows="4"
-                    :placeholder="getPlaceholder(question)"
-                  ></textarea>
-
-                  <!-- SELECT -->
-                  <select
-                    v-else-if="question.type === 'select'"
-                    v-model="getModel(currentBookPage.key)[question.id]"
-                    class="form-select"
-                  >
-                    <option value="">Seleccione opción corporativa...</option>
-                    <option v-for="option in question.options" :key="option" :value="option">
-                      {{ option }}
-                    </option>
-                  </select>
-
-                  <!-- CARDS (Nivel de Servicio) -->
-                  <div v-else-if="question.type === 'cards'" class="cards-grid">
+                  <div class="company-cards-grid">
                     <div
-                      v-for="opt in question.options"
-                      :key="opt.value"
-                      class="radio-card"
-                      :class="{ selected: getModel(currentBookPage.key)[question.id] === opt.value }"
-                      @click="getModel(currentBookPage.key)[question.id] = opt.value"
+                      v-for="company in section.companies"
+                      :key="company.size"
+                      class="company-card"
                     >
-                      <input
-                        type="radio"
-                        :name="question.id"
-                        :value="opt.value"
-                        v-model="getModel(currentBookPage.key)[question.id]"
-                      />
-                      <div>
-                        <strong>{{ opt.title }}</strong>
-                        <p class="mb-0 text-muted">{{ opt.description }}</p>
+                      <!-- Header de Tarjeta -->
+                      <div class="company-card-header">
+                        <div class="company-icon-wrapper">
+                          <i :class="company.icon"></i>
+                        </div>
+                        <div class="company-info">
+                          <h5 class="company-size-label">{{ company.sizeLabel }}</h5>
+                          <p class="company-description">{{ company.description }}</p>
+                        </div>
+                      </div>
+
+                      <!-- Body de Tarjeta -->
+                      <div class="company-card-body">
+                        <div class="form-group">
+                          <label class="form-label">{{ company.label }}</label>
+                          <textarea
+                            v-model="getModel(currentBookPage.key)[company.questionId]"
+                            class="form-control"
+                            rows="5"
+                            :placeholder="`Describa los requerimientos de infraestructura específicos para una ${company.sizeLabel}...`"
+                          ></textarea>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </template>
+
+              <!-- FORMULARIO ESTÁNDAR (NO ES COMPANY-SIZE) -->
+              <template v-else>
+                <div class="card-box section-card mb-4">
+                  <div class="card-title">
+                    <i :class="section.icon"></i>
+                    <span>{{ section.title }}</span>
+                  </div>
+
+                  <div v-for="question in section.questions" :key="question.id" class="form-group">
+                    <label class="form-label">
+                      {{ question.label }}
+                      <span v-if="question.required">*</span>
+                    </label>
+
+                    <!-- TEXT -->
+                    <input
+                      v-if="question.type === 'text'"
+                      v-model="getModel(currentBookPage.key)[question.id]"
+                      type="text"
+                      class="form-control"
+                      :placeholder="getPlaceholder(question)"
+                    />
+
+                    <!-- EMAIL -->
+                    <input
+                      v-else-if="question.type === 'email'"
+                      v-model="getModel(currentBookPage.key)[question.id]"
+                      type="email"
+                      class="form-control"
+                      :placeholder="getPlaceholder(question)"
+                    />
+
+                    <!-- TEL -->
+                    <input
+                      v-else-if="question.type === 'tel'"
+                      v-model="getModel(currentBookPage.key)[question.id]"
+                      type="tel"
+                      class="form-control"
+                      :placeholder="getPlaceholder(question)"
+                    />
+
+                    <!-- NUMBER -->
+                    <input
+                      v-else-if="question.type === 'number'"
+                      v-model.number="getModel(currentBookPage.key)[question.id]"
+                      type="number"
+                      class="form-control"
+                      :placeholder="getPlaceholder(question)"
+                    />
+
+                    <!-- DATE -->
+                    <input
+                      v-else-if="question.type === 'date'"
+                      v-model="getModel(currentBookPage.key)[question.id]"
+                      type="date"
+                      class="form-control"
+                    />
+
+                    <!-- TIME -->
+                    <input
+                      v-else-if="question.type === 'time'"
+                      v-model="getModel(currentBookPage.key)[question.id]"
+                      type="time"
+                      class="form-control"
+                    />
+
+                    <!-- TEXTAREA -->
+                    <textarea
+                      v-else-if="question.type === 'textarea'"
+                      v-model="getModel(currentBookPage.key)[question.id]"
+                      class="form-control"
+                      rows="4"
+                      :placeholder="getPlaceholder(question)"
+                    ></textarea>
+
+                    <!-- SELECT -->
+                    <select
+                      v-else-if="question.type === 'select'"
+                      v-model="getModel(currentBookPage.key)[question.id]"
+                      class="form-select"
+                    >
+                      <option value="">Seleccione opción corporativa...</option>
+                      <option v-for="option in question.options" :key="option" :value="option">
+                        {{ option }}
+                      </option>
+                    </select>
+
+                    <!-- CARDS (Nivel de Servicio) -->
+                    <div v-else-if="question.type === 'cards'" class="cards-grid">
+                      <div
+                        v-for="opt in question.options"
+                        :key="opt.value"
+                        class="radio-card"
+                        :class="{ selected: getModel(currentBookPage.key)[question.id] === opt.value }"
+                        @click="getModel(currentBookPage.key)[question.id] = opt.value"
+                      >
+                        <input
+                          type="radio"
+                          :name="question.id"
+                          :value="opt.value"
+                          v-model="getModel(currentBookPage.key)[question.id]"
+                        />
+                        <div>
+                          <strong>{{ opt.title }}</strong>
+                          <p class="mb-0 text-muted">{{ opt.description }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
             </template>
 
             <!-- VISTA RESUMEN -->
@@ -720,7 +772,8 @@ async function submitSurvey() {
 .survey-book .book-body {
   display: grid;
   grid-template-columns: 280px 1fr;
-  min-height: 650px;
+  min-height: auto;
+  height: auto;
 }
 
 .survey-book .book-sidebar {
@@ -784,6 +837,8 @@ async function submitSurvey() {
 .survey-book .book-page {
   padding: 40px;
   background: var(--sb-bg-card);
+  overflow-y: auto;
+  max-height: calc(100vh - 280px);
 }
 
 .survey-book .page-title {
@@ -965,6 +1020,149 @@ async function submitSurvey() {
 }
 
 /* ==========================================================
+   COMPANY SIZE SECTION (TARJETAS DE TAMAÑO EMPRESA)
+========================================================== */
+.survey-book .company-size-section {
+  width: 100%;
+}
+
+.survey-book .section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--sb-bg-card-subtle);
+}
+
+.survey-book .section-header-icon {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8 !important;
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.survey-book .section-title-main {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--sb-text-main) !important;
+  margin: 0;
+}
+
+.survey-book .section-subtitle {
+  font-size: 14px;
+  color: var(--sb-text-muted) !important;
+  margin: 4px 0 0 0;
+}
+
+/* GRID DE TARJETAS */
+.survey-book .company-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.survey-book .company-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid var(--sb-border);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--sb-shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.survey-book .company-card:hover {
+  border-color: var(--sb-primary);
+  box-shadow: var(--sb-shadow-md);
+  transform: translateY(-4px);
+}
+
+.survey-book .company-card-header {
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--sb-border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.survey-book .company-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+  color: #ffffff !important;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.survey-book .company-info {
+  flex: 1;
+}
+
+.survey-book .company-size-label {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--sb-text-main) !important;
+  margin: 0 0 4px 0;
+}
+
+.survey-book .company-description {
+  font-size: 13px;
+  color: var(--sb-text-muted) !important;
+  margin: 0;
+}
+
+/* CARD BODY */
+.survey-book .company-card-body {
+  padding: 24px;
+  flex: 1;
+}
+
+.survey-book .company-card-body .form-group {
+  margin-bottom: 0;
+}
+
+.survey-book .company-card-body .form-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.survey-book .company-card-body textarea.form-control {
+  resize: vertical;
+  min-height: 140px;
+  border: 1px solid var(--sb-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.survey-book .company-card-body textarea.form-control:focus {
+  border-color: var(--sb-primary);
+  box-shadow: 0 0 0 3px var(--sb-primary-glow);
+}
+
+/* ==========================================================
    RESUMEN FINAL Y FOOTER
 ========================================================== */
 .survey-book .summary-body {
@@ -1078,9 +1276,22 @@ async function submitSurvey() {
 
 /* RESPONSIVE DENTRO DEL CONTENEDOR */
 @media (max-width: 992px) {
-  .survey-book .book-body { grid-template-columns: 1fr; }
-  .survey-book .book-sidebar { border-right: none; border-bottom: 1px solid var(--sb-border); }
+  .survey-book .book-body { 
+    grid-template-columns: 1fr;
+  }
+  .survey-book .book-sidebar { 
+    border-right: none; 
+    border-bottom: 1px solid var(--sb-border); 
+  }
+  .survey-book .book-page {
+    max-height: none;
+    overflow-y: visible;
+  }
   .survey-book .book-header, 
-  .survey-book .book-footer { flex-direction: column; gap: 14px; text-align: center; }
+  .survey-book .book-footer { 
+    flex-direction: column; 
+    gap: 14px; 
+    text-align: center; 
+  }
 }
 </style>

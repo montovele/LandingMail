@@ -6,8 +6,6 @@ import TabsSection from "./Landing/TabsSection.vue";
 
 import CTASection from "./Landing/CTASection.vue";
 
-import Contact from "./Contact.vue";
-
 </script>
 
 <template>

@@ -1,5 +1,9 @@
 <script setup>
 
+import { useServicesTabs } from "../composables/useServicesTabs"
+
+const { setActiveTab } = useServicesTabs()
+
 const company = {
 
     name: "HENCOM",
@@ -14,31 +18,44 @@ const company = {
 
 }
 
+const navigateTo = (page) => {
+  setActiveTab(page)
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
+
 const companyLinks = [
 
     {
         label:"Inicio",
-        href:"#home-section"
+        href:"#home-section",
+        page: "home"
     },
 
     {
         label:"Consultoría",
-        href:"#services-section"
+        href:"#consultoria",
+        page: "consultoria"
     },
 
     {
         label:"Soluciones",
-        href:"#services-section"
+        href:"#soluciones",
+        page: "soluciones"
     },
 
     {
         label:"Nosotros",
-        href:"#services-section"
+        href:"#nosotros",
+        page: "nosotros"
     },
 
     {
         label:"Contacto",
-        href:"#contact-section"
+        href:"#contacto",
+        page: "contacto"
     }
 
 ]
@@ -167,7 +184,10 @@ v-for="item in companyLinks"
 
 >
 
-<a :href="item.href">
+<a 
+  href="#" 
+  @click.prevent="navigateTo(item.page)"
+>
 
 {{ item.label }}
 

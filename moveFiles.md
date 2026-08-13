@@ -1,3 +1,13 @@
+
+
+ssh root@108.174.155.118 -p 22022
+
+
+
+
+
+
+
 Alternativa rápida (sin backup)
 
 Si quieres reemplazar directamente:

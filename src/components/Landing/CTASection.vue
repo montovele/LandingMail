@@ -1,5 +1,17 @@
 <script setup>
 
+import { useServicesTabs } from '../../composables/useServicesTabs'
+
+const { setActiveTab } = useServicesTabs()
+
+const navigateToContact = () => {
+  setActiveTab('contacto')
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
+
 const benefits = [
 
 {
@@ -86,23 +98,25 @@ v-for="item in benefits"
 
 <div class="cta-buttons">
 
-<a
-href="#contact-section"
+<button
+type="button"
+@click="navigateToContact"
 class="btn btn-primary btn-lg"
 >
 
 Solicitar Cotización
 
-</a>
+</button>
 
-<a
-href="#contact-section"
+<button
+type="button"
+@click="navigateToContact"
 class="btn btn-outline-primary btn-lg"
 >
 
 Agendar Asesoría
 
-</a>
+</button>
 
 </div>
 

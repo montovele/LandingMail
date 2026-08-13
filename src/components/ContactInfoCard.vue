@@ -84,7 +84,7 @@ const cards = computed(() => [
 
     {
 
-        icon: "icon-location-pin",
+        icon: "icon-location-arrow",
 
         title: "Ubicación",
 
@@ -96,7 +96,7 @@ const cards = computed(() => [
 
     {
 
-        icon: "icon-clock",
+        icon: "icon-clock-o",
 
         title: "Horario",
 

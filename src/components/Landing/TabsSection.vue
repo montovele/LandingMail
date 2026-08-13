@@ -2,7 +2,7 @@
 
 import { computed } from 'vue'
 
-import { useServicesTabs } from '../../composables/useServicesTabs.js'
+import { useInternalTabs } from '../../composables/useInternalTabs.js'
 
 import TabConsultoria from './TabConsultoria.vue'
 
@@ -13,17 +13,17 @@ import TabNosotros from './TabNosotros.vue'
 
 /*
 |--------------------------------------------------------------------------
-| TAB GLOBAL
+| TAB INTERNA (SEPARADA DEL ROUTER PRINCIPAL)
 |--------------------------------------------------------------------------
 */
 
 const {
 
-    activeTab,
+    internalTab,
 
-    setActiveTab
+    setInternalTab
 
-} = useServicesTabs()
+} = useInternalTabs()
 
 
 /*
@@ -75,7 +75,7 @@ const tabs = [
 
 const currentComponent = computed(() => {
 
-    switch (activeTab.value) {
+    switch (internalTab.value) {
 
         case 'consultoria':
 
@@ -166,13 +166,13 @@ const currentComponent = computed(() => {
 
         active:
 
-            activeTab === tab.id
+            internalTab === tab.id
 
     }"
 
     @click="
 
-        setActiveTab(tab.id)
+        setInternalTab(tab.id)
 
     "
 
@@ -206,7 +206,7 @@ const currentComponent = computed(() => {
 
     :is="currentComponent"
 
-    :key="activeTab"
+    :key="internalTab"
 
 />
 

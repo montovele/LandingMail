@@ -60,6 +60,9 @@ const menuItems = [
  * ========================================================================== */
 const scrollTo = (selector) => {
   if (!selector) return
+  // No scroll si es una ruta de página
+  if (selector === '#contacto') return
+  
   const element = document.querySelector(selector)
   if (!element) return
 
@@ -72,9 +75,19 @@ const scrollTo = (selector) => {
 const navigate = (href) => {
   if (href === '#home-section') {
     setActiveTab('home')
+    closeAllMenus()
+    scrollTo(href)
+  } else if (href === '#contacto') {
+    setActiveTab('contacto')
+    closeAllMenus()
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  } else {
+    closeAllMenus()
+    scrollTo(href)
   }
-  closeAllMenus()
-  scrollTo(href)
 }
 
 const goToService = (serviceId) => {
@@ -205,7 +218,7 @@ onBeforeUnmount(() => {
           <li>
             <button
               class="nav-btn"
-              @click="navigate('#contact-section')"
+              @click="navigate('#contacto')"
             >
               Solicitar Asesoría
             </button>
@@ -272,7 +285,7 @@ onBeforeUnmount(() => {
 
         <button
           class="nav-btn mobile-cta"
-          @click="navigate('#contact-section')"
+          @click="navigate('#contacto')"
         >
           Solicitar Asesoría
         </button>

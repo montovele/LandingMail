@@ -1,5 +1,16 @@
 <script setup>
 import ServiceCard from "./ServiceCard.vue";
+import { useServicesTabs } from "../../composables/useServicesTabs";
+
+const { setActiveTab } = useServicesTabs()
+
+const navigateToContact = () => {
+  setActiveTab('contacto')
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
 
 const services = [
 
@@ -132,7 +143,8 @@ Nuestro equipo analiza las necesidades de tu empresa para diseñar soluciones te
 <div class="col-lg-4 text-lg-end">
 
 <a
-href="#contact-section"
+@click.prevent="navigateToContact"
+href="#"
 class="btn btn-primary btn-lg"
 >
 
