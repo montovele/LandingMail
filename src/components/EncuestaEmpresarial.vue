@@ -294,6 +294,7 @@ async function submitSurvey() {
     console.log("[ENCUESTA] Payload válido enviado:", payload);
     await guardar(payload);
     finished.value = true;
+
       // Esperar un momento para que el usuario vea el éxito
   setTimeout(() => {
 

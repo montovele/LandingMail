@@ -4,6 +4,7 @@ import Header from "./components/Header.vue"
 import LandingContent from "./components/LandingContent.vue"
 import Footer from "./components/Footer.vue"
 import BackToTop from "./components/Landing/BackToTop.vue"
+import WhatsappWidget from "./components/WhatsappWidget.vue"
 
 // Proporcionar contexto global si es necesario
 provide('appConfig', {
@@ -20,6 +21,7 @@ provide('appConfig', {
     </main>
     <Footer />
     <BackToTop />
+    <WhatsappWidget />
   </div>
 </template>
 

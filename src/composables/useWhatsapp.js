@@ -65,29 +65,17 @@ Muchas gracias.
  */
 function quoteMessage(data = {}) {
 
+    const contactDetails = [
+        data.email ? `Correo electrónico: ${data.email}` : "",
+        data.phone ? `Teléfono: ${data.phone}` : ""
+    ].filter(Boolean).join("\n")
+
     return `
 Hola HENCOM.
 
-Me gustaría solicitar una cotización.
+Me gustaría recibir información acerca de sus servicios.
 
-Nombre:
-${data.name || ""}
-
-Empresa:
-${data.company || ""}
-
-Correo:
-${data.email || ""}
-
-Teléfono:
-${data.phone || ""}
-
-Servicio:
-${data.service || ""}
-
-Mensaje:
-
-${data.message || ""}
+${contactDetails}
 
 Muchas gracias.
 `.trim()
