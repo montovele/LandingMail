@@ -331,14 +331,14 @@ onBeforeUnmount(() => {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   text-decoration: none;
   border-radius: 12px;
 }
 
 .logo-image {
-  max-width: 178px;
-  height: 48px;
+  max-width: 278px;
+  height: 160px;
   object-fit: contain;
   display: block;
 }
