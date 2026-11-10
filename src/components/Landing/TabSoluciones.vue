@@ -45,7 +45,7 @@ const software = [
 
 const desarrollo = [
   {
-    icon: "icon-monitor",
+    icon: "icon-desktop",
     title: "Sitios Web",
     description:
       "Diseño y desarrollo de páginas web modernas y adaptables.",

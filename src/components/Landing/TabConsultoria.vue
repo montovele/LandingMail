@@ -43,7 +43,7 @@ color:"#dc3545"
 },
 
 {
-icon:"icon-network-wired",
+icon:"icon-sitemap",
 title:"Redes Empresariales",
 description:"Configuramos redes LAN, WiFi y enlaces empresariales para garantizar conectividad y estabilidad.",
 color:"#fd7e14"

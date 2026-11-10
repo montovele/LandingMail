@@ -63,7 +63,7 @@ function youtubeVideoUrl() {
           <a :href="youtubeVideoUrl()" class="btn-video" data-fancybox>
             <span class="wrap-icon-play">
               <svg
-                class="bi bi-play-fill"
+                class="icon-play"
                 width="1em"
                 height="1em"
                 viewBox="0 0 16 16"

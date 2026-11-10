@@ -4,7 +4,7 @@ import StatsSection from "./StatsSection.vue";
 
 const advantages = [
   {
-    icon: "icon-award",
+    icon: "icon-trophy",
     title: "Experiencia Comprobada",
     description:
       "Participamos en proyectos tecnológicos para empresas, integrando soluciones modernas y escalables.",
@@ -18,7 +18,7 @@ const advantages = [
     color: "#20c997",
   },
   {
-    icon: "icon-cpu",
+    icon: "icon-microchip",
     title: "Tecnología de Última Generación",
     description:
       "Trabajamos con herramientas y plataformas modernas para garantizar resultados confiables.",

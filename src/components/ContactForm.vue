@@ -15,7 +15,7 @@ HEADER
 
 <div class="wizard-icon">
 
-<i class="bi bi-diagram-3"></i>
+<i class="icon-sitemap"></i>
 
 </div>
 
@@ -103,7 +103,7 @@ PASO 1 CONTACTO
 
 <div class="section-title">
 
-<i class="bi bi-person"></i>
+<i class="icon-user"></i>
 
 <h2>
 Datos de contacto
@@ -222,7 +222,7 @@ PASO 2 PERFIL EMPRESA
 <div class="section-title">
 
 
-<i class="bi bi-building"></i>
+<i class="icon-building"></i>
 
 
 <h2>
@@ -374,7 +374,7 @@ PASO 3 RETOS
 
 <div class="section-title">
 
-<i class="bi bi-bullseye"></i>
+<i class="icon-bullseye"></i>
 
 <h2>
 Principales retos actuales
@@ -451,7 +451,7 @@ PASO 4 MADUREZ DIGITAL
 <div class="section-title">
 
 
-<i class="bi bi-cpu"></i>
+<i class="icon-microchip"></i>
 
 
 <h2>
@@ -529,7 +529,7 @@ PASO 5 SOLUCION
 <div class="section-title">
 
 
-<i class="bi bi-lightbulb"></i>
+<i class="icon-lightbulb-o"></i>
 
 
 <h2>
@@ -591,7 +591,7 @@ PASO 6 PROYECTO
 
 <div class="section-title">
 
-<i class="bi bi-cash-stack"></i>
+<i class="icon-money"></i>
 
 
 <h2>
@@ -663,7 +663,7 @@ PASO FINAL
 
 <div class="section-title">
 
-<i class="bi bi-check-circle"></i>
+<i class="icon-check-circle"></i>
 
 <h2>
 Confirmación

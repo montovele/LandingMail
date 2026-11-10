@@ -66,13 +66,13 @@ const pages = [
   {
     key: "formulario",
     title: "Formulario",
-    icon: "bi bi-file-earmark-text",
+    icon: "icon-file-text",
     description: "Información general de la empresa.",
     sections: [
       {
         id: "empresa",
         title: "Información General",
-        icon: "bi bi-building",
+        icon: "icon-building",
         questions: [
           { id: "empresa", label: "Empresa", type: "text", required: true, placeholder: "Nombre de la empresa" },
           { id: "contacto", label: "Contacto", type: "text", required: true, placeholder: "Nombre de contacto" },
@@ -97,13 +97,13 @@ const pages = [
   {
     key: "nivelServicio",
     title: "Nivel de Servicio",
-    icon: "bi bi-clipboard2-check",
+    icon: "icon-check-square",
     description: "Selección del nivel de servicio requerido.",
     sections: [
       {
         id: "servicio",
         title: "Nivel de Servicio Requerido",
-        icon: "bi bi-award",
+        icon: "icon-trophy",
         questions: [
           {
             id: "nivelServicio",
@@ -124,19 +124,19 @@ const pages = [
   {
     key: "requisitosTamanio",
     title: "Requerimientos",
-    icon: "bi bi-bar-chart",
+    icon: "icon-bar-chart",
     description: "Especifica los requerimientos según el tamaño de tu empresa.",
     sections: [
       {
         id: "requisitosPequena",
         type: "company-size",
         title: "Requerimientos por Tamaño de Empresa",
-        icon: "bi bi-diagram-3",
+        icon: "icon-sitemap",
         companies: [
           {
             size: "pequena",
             sizeLabel: "Pequeña Empresa",
-            icon: "bi bi-shop",
+            icon: "icon-shopping-cart",
             description: "Hasta 50 empleados",
             questionId: "detallePequena",
             label: "Requerimientos de Infraestructura"
@@ -144,7 +144,7 @@ const pages = [
           {
             size: "mediana",
             sizeLabel: "Mediana Empresa",
-            icon: "bi bi-buildings",
+            icon: "icon-building",
             description: "51 - 250 empleados",
             questionId: "detalleMediana",
             label: "Requerimientos de Infraestructura"
@@ -152,7 +152,7 @@ const pages = [
           {
             size: "grande",
             sizeLabel: "Gran Empresa",
-            icon: "bi bi-building-fill",
+            icon: "icon-building",
             description: "Más de 250 empleados",
             questionId: "detalleGrande",
             label: "Requerimientos de Infraestructura"
@@ -319,7 +319,7 @@ async function submitSurvey() {
       <header class="book-header">
         <div class="header-left">
           <div class="company-logo">
-            <i class="bi bi-building"></i>
+            <i class="icon-building"></i>
           </div>
           <div>
             <h1>HENCOM</h1>
@@ -367,8 +367,7 @@ async function submitSurvey() {
       <div class="page-content">
         <div class="page-title">
 <div class="page-icon">
-  <!-- Con valor por defecto usando FontAwesome (ej. fa-solid fa-file-lines) -->
-  <i :class="currentBookPage?.icon || 'fa-solid fa-file-lines'"></i>
+  <i :class="currentBookPage?.icon || 'icon-file-text'"></i>
 </div>
           <div>
             <h3>{{ currentBookPage.title }}</h3>
@@ -542,7 +541,7 @@ async function submitSurvey() {
             <!-- VISTA RESUMEN -->
             <!-- <div v-if="currentBookPage.key === 'resumen'" class="summary-container">
               <div class="summary-header">
-                <i class="bi bi-check-circle-fill"></i>
+                <i class="icon-check-circle"></i>
                 <div>
                   <h3>Resumen de la Encuesta</h3>
                   <p>Revise la información antes de enviarla.</p>
@@ -565,7 +564,7 @@ async function submitSurvey() {
       <footer class="book-footer">
         <div class="footer-left">
           <button class="btn btn-outline-primary" @click="previousPage" :disabled="isFirstPage">
-            <i class="bi bi-arrow-left"></i> Anterior
+            <i class="icon-arrow-left"></i> Anterior
           </button>
         </div>
         <div class="footer-center">
@@ -573,7 +572,7 @@ async function submitSurvey() {
         </div>
         <div class="footer-right">
           <button v-if="!isLastPage" class="btn btn-primary" @click="nextPage">
-            Siguiente <i class="bi bi-arrow-right"></i>
+            Siguiente <i class="icon-arrow-right"></i>
           </button>
           <button v-else class="btn btn-success" @click="submitSurvey" :disabled="loading || sending">
             <span v-if="loading || sending" class="spinner-border spinner-border-sm me-2"></span>

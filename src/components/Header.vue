@@ -192,9 +192,7 @@ onBeforeUnmount(() => {
                 <i
                   class="icon-chevron-down"
                   :class="{ rotate: openDropdown === item.id }"
-                >
-                  ▼
-                </i>
+                ></i>
               </button>
 
               <Transition name="dropdown">
@@ -262,9 +260,7 @@ onBeforeUnmount(() => {
               <i
                 class="icon-chevron-down"
                 :class="{ rotate: openDropdown === item.id }"
-              >
-                ▼
-              </i>
+              ></i>
             </button>
 
             <Transition name="dropdown">
@@ -311,6 +307,7 @@ onBeforeUnmount(() => {
   position: sticky;
   top: 0;
   z-index: 9999;
+  padding: 0;
   background: var(--bg-dark);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -337,8 +334,10 @@ onBeforeUnmount(() => {
 }
 
 .logo-image {
-  max-width: 278px;
-  height: 160px;
+  width: 190px;
+  max-width: 45vw;
+  max-height: 72px;
+  height: auto;
   object-fit: contain;
   display: block;
 }

@@ -17,7 +17,7 @@ const handleNavigate = (href) => {
 const props = defineProps({
   icon: {
     type: String,
-    default: "layers", // nombre del icono (sin prefijo)
+    default: "icon-layers",
   },
   // Si usas SVG, pasa el path aquí
   iconSvg: {

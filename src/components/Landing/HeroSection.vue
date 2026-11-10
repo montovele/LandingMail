@@ -84,7 +84,7 @@ const services = [
 
         title: "Software Empresarial",
 
-        icon: "icon-screen-desktop",
+        icon: "icon-desktop",
 
         description:
             "ERP, CRM, Punto de Venta y sistemas personalizados."
@@ -117,7 +117,7 @@ const services = [
 
         title: "Videovigilancia",
 
-        icon: "icon-camrecorder",
+        icon: "icon-video-camera",
 
         description:
             "CCTV profesional con monitoreo inteligente."
@@ -187,7 +187,7 @@ const techCards = [
 
         title: "ERP Empresarial",
 
-        icon: "icon-grid",
+        icon: "icon-th-large",
 
         text: "Automatización de procesos"
 
@@ -207,7 +207,7 @@ const techCards = [
 
         title: "Business Intelligence",
 
-        icon: "icon-graph",
+        icon: "icon-line-chart",
 
         text: "Información para decisiones"
 
@@ -358,7 +358,7 @@ const keywords = [
 
                     <div class="hero-badge">
 
-                        <span class="icon-badge"></span>
+                        <span class="icon-id-badge"></span>
 
                         {{ hero.badge }}
 
@@ -511,7 +511,7 @@ const keywords = [
 
                         <div class="floating-icon">
 
-                            <span class="icon-grid"></span>
+                            <span class="icon-th-large"></span>
 
                         </div>
 

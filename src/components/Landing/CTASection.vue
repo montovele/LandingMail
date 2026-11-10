@@ -26,7 +26,7 @@ text:"Diagnóstico tecnológico personalizado"
 
 icon:"icon-check-circle",
 
-text:"Consultoría especializada para PyMES y empresas"
+text:"Asesoría especializada para tu empresa"
 
 },
 
@@ -34,7 +34,7 @@ text:"Consultoría especializada para PyMES y empresas"
 
 icon:"icon-check-circle",
 
-text:"Implementación de soluciones integrales"
+text:"Soluciones integrales para tus procesos"
 
 }
 
@@ -59,21 +59,20 @@ data-aos="zoom-in"
 
 <span class="cta-badge">
 
-Comienza Hoy
+Hablemos de tu proyecto
 
 </span>
 
 <h2>
 
-¿Listo para transformar tu empresa con tecnología?
+¿Quieres impulsar tu empresa con tecnología?
 
 </h2>
 
 <p>
 
-Nuestro equipo de especialistas está preparado para ayudarte a
-optimizar procesos, fortalecer tu infraestructura tecnológica e
-implementar soluciones que impulsen el crecimiento de tu negocio.
+Te ayudamos a optimizar tus procesos y fortalecer tu infraestructura
+tecnológica con soluciones pensadas para las necesidades de tu empresa.
 
 </p>
 
@@ -104,17 +103,7 @@ type="button"
 class="btn btn-primary btn-lg"
 >
 
-Solicitar Cotización
-
-</button>
-
-<button
-type="button"
-@click="navigateToContact"
-class="btn btn-outline-primary btn-lg"
->
-
-Agendar Asesoría
+Solicitar asesoría
 
 </button>
 

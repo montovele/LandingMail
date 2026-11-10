@@ -257,7 +257,7 @@ Contacto
 
 <li>
 
-<span class="icon-location-pin"></span>
+<span class="icon-map-marker"></span>
 
 {{ company.location }}
 
@@ -336,6 +336,54 @@ Todos los derechos reservados.
 
 }
 
+.social{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+.footer .social a{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:14px;
+
+    background:white;
+
+    color:#0d6efd;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:20px;
+
+    border:1px solid #dce7f3;
+
+    transition:.30s;
+
+    box-shadow:0 8px 18px rgba(13,110,253,.08);
+
+}
+
+.footer .social a:hover{
+
+    background:#0d6efd;
+
+    color:white;
+
+    transform:translateY(-5px);
+
+}
+
 .footer ul{
 
     list-style:none;
@@ -405,7 +453,7 @@ margin:0;
 
 font-size:15px;
 
-color:rgba(255,255,255,.65);
+color:#60758d;
 
 }
 
@@ -421,47 +469,11 @@ text-align:center;
 
     display:flex;
 
+    justify-content:center;
+
     gap:15px;
 
     margin-top:30px;
-
-}
-
-.social a{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:14px;
-
-    background:white;
-
-    color:#0d6efd;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:20px;
-
-    border:1px solid #dce7f3;
-
-    transition:.30s;
-
-    box-shadow:0 8px 18px rgba(13,110,253,.08);
-
-}
-
-.social a:hover{
-
-    background:#0d6efd;
-
-    color:white;
-
-    transform:translateY(-5px);
 
 }
 

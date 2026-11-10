@@ -14,7 +14,7 @@ provide('appConfig', {
 </script>
 
 <template>
-  <div id="app" class="app-container">
+  <div class="app-container">
     <Header />
     <main class="app-main">
       <LandingContent />
@@ -26,13 +26,10 @@ provide('appConfig', {
 </template>
 
 <style scoped>
-#app {
+.app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-.app-container {
   width: 100%;
 }
 

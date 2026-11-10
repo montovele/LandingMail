@@ -1,4 +1,4 @@
-<script setup>
+    <script setup>
 
 import { computed, defineAsyncComponent } from 'vue'
 import { useServicesTabs } from '../composables/useServicesTabs'
