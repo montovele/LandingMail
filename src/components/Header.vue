@@ -132,14 +132,22 @@ const handleEscape = (event) => {
   }
 }
 
+const handleResize = () => {
+  if (window.innerWidth > 991) {
+    closeAllMenus()
+  }
+}
+
 onMounted(() => {
   document.addEventListener('click', handleOutsideClick)
   document.addEventListener('keydown', handleEscape)
+  window.addEventListener('resize', handleResize)
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleOutsideClick)
   document.removeEventListener('keydown', handleEscape)
+  window.removeEventListener('resize', handleResize)
 })
 </script>
 
@@ -229,11 +237,12 @@ onBeforeUnmount(() => {
         <button
           class="mobile-toggle"
           type="button"
-          @click="toggleMobileMenu"
-          aria-label="Abrir Menú"
+          :aria-expanded="mobileMenuOpen"
+          aria-controls="mobile-navigation"
+          :aria-label="mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'"
+          @click.stop="toggleMobileMenu"
         >
-          <span v-if="!mobileMenuOpen">☰</span>
-          <span v-else>✕</span>
+          <span aria-hidden="true">{{ mobileMenuOpen ? '✕' : '☰' }}</span>
         </button>
       </div>
     </div>
@@ -242,7 +251,12 @@ onBeforeUnmount(() => {
     <!-- MOBILE MENU PANEL -->
     <!-- ========================================================= -->
     <Transition name="mobile-menu">
-      <div v-if="mobileMenuOpen" class="mobile-menu">
+      <div
+        v-if="mobileMenuOpen"
+        id="mobile-navigation"
+        class="mobile-menu"
+        @click.stop
+      >
         <template v-for="item in menuItems" :key="item.id">
           <!-- NORMAL LINK -->
           <button
@@ -255,7 +269,12 @@ onBeforeUnmount(() => {
 
           <!-- DROPDOWN LINK -->
           <div v-else class="mobile-dropdown">
-            <button class="mobile-link" @click="toggleDropdown(item.id)">
+            <button
+              class="mobile-link"
+              type="button"
+              :aria-expanded="openDropdown === item.id"
+              @click.stop="toggleDropdown(item.id)"
+            >
               <span>{{ item.label }}</span>
               <i
                 class="icon-chevron-down"
@@ -268,6 +287,7 @@ onBeforeUnmount(() => {
                 <button
                   v-for="service in item.children"
                   :key="service.id"
+                  type="button"
                   class="mobile-subitem"
                   :class="{ active: activeTab === service.id }"
                   @click="goToService(service.id)"
@@ -280,6 +300,7 @@ onBeforeUnmount(() => {
         </template>
 
         <button
+          type="button"
           class="nav-btn mobile-cta"
           @click="navigate('#contacto')"
         >
