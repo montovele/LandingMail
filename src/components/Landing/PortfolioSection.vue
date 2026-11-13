@@ -1,131 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-const descriptions = {
-  'WhatsApp Image 2026-11-10 at 10.14.28.jpeg': {
-    category: 'Conectividad inalámbrica',
-    title: 'Punto de acceso inalámbrico',
-    alt: 'Equipo de conectividad inalámbrica instalado junto a una ventana'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.29 (1).jpeg': {
-    category: 'Control de acceso',
-    title: 'Acceso con teclado digital',
-    alt: 'Teclado digital instalado para control de acceso'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.29.jpeg': {
-    category: 'Seguridad electrónica',
-    title: 'Dispositivo de alarma',
-    alt: 'Dispositivo de seguridad electrónica instalado en una pared'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.30.jpeg': {
-    category: 'Redes y cableado',
-    title: 'Cableado de red en gabinete',
-    alt: 'Cableado de red conectado y organizado en un gabinete'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.31 (1).jpeg': {
-    category: 'Redes y cableado',
-    title: 'Panel de conexiones de red',
-    alt: 'Conexiones azules de red organizadas en un panel'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.31 (2).jpeg': {
-    category: 'Infraestructura de red',
-    title: 'Equipos de red en rack',
-    alt: 'Equipos de red montados y conectados en un rack'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.31 (3).jpeg': {
-    category: 'Infraestructura de red',
-    title: 'Switch y conexiones de red',
-    alt: 'Switch de red y cableado instalados en un gabinete'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.31 (4).jpeg': {
-    category: 'Infraestructura tecnológica',
-    title: 'Gabinete de comunicaciones',
-    alt: 'Gabinete técnico con equipos y cableado instalados'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.31 (5).jpeg': {
-    category: 'Videovigilancia',
-    title: 'Monitoreo de videovigilancia',
-    alt: 'Monitores de un sistema de videovigilancia instalado'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.31.jpeg': {
-    category: 'Infraestructura tecnológica',
-    title: 'Rack tecnológico con monitoreo',
-    alt: 'Rack con equipos tecnológicos y pantallas de monitoreo'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.36 (1).jpeg': {
-    category: 'Videovigilancia',
-    title: 'Cámara interior de videovigilancia',
-    alt: 'Cámara de videovigilancia instalada en una esquina interior'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.36 (2).jpeg': {
-    category: 'Videovigilancia',
-    title: 'Cámara de videovigilancia en techo',
-    alt: 'Cámara de videovigilancia montada en el techo'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.36 (3).jpeg': {
-    category: 'Videovigilancia',
-    title: 'Cámara de videovigilancia instalada',
-    alt: 'Cámara de seguridad instalada en una estructura'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.36.jpeg': {
-    category: 'Videovigilancia',
-    title: 'Cámara domo de interior',
-    alt: 'Cámara de seguridad tipo domo instalada en el techo'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.37 (1).jpeg': {
-    category: 'Videovigilancia',
-    title: 'Estación de monitoreo',
-    alt: 'Pantallas de monitoreo dentro de un rack de seguridad'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.37.jpeg': {
-    category: 'Instalación en sitio',
-    title: 'Instalación de infraestructura tecnológica',
-    alt: 'Técnico trabajando en la instalación de equipos en altura'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.40 (1).jpeg': {
-    category: 'Sensores y seguridad',
-    title: 'Sensor de seguridad en techo',
-    alt: 'Sensor de seguridad instalado en un techo interior'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.40 (2).jpeg': {
-    category: 'Control de acceso',
-    title: 'Terminal digital de acceso',
-    alt: 'Terminal digital instalada para control de acceso'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.40 (3).jpeg': {
-    category: 'Conectividad inalámbrica',
-    title: 'Punto de acceso para red inalámbrica',
-    alt: 'Punto de acceso inalámbrico listo para su instalación'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.40 (4).jpeg': {
-    category: 'Videovigilancia',
-    title: 'Cámara de videovigilancia exterior',
-    alt: 'Cámara de videovigilancia instalada en el exterior'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.40 (5).jpeg': {
-    category: 'Videovigilancia',
-    title: 'Videovigilancia en acceso interior',
-    alt: 'Cámara de seguridad instalada junto a una entrada'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.40.jpeg': {
-    category: 'Redes y cableado',
-    title: 'Conexión de red instalada',
-    alt: 'Cable de red conectado a un equipo de comunicaciones'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.41 (1).jpeg': {
-    category: 'Iluminación e integración',
-    title: 'Iluminación integrada al espacio',
-    alt: 'Iluminación instalada e integrada en un espacio interior'
-  },
-  'WhatsApp Image 2026-11-10 at 10.14.41.jpeg': {
-    category: 'Videovigilancia',
-    title: 'Cámara exterior de videovigilancia',
-    alt: 'Cámara de videovigilancia instalada en una fachada'
-  }
-}
-
 const images = Object.entries(
-  import.meta.glob('../../../imagenesServicios/*.jpeg', {
+  import.meta.glob('../../../imagenesServicios/imagenesServicios/*.jpeg', {
     eager: true,
     import: 'default'
   })
@@ -135,10 +12,18 @@ const images = Object.entries(
   )
   .map(([path, src]) => {
     const fileName = path.slice(path.lastIndexOf('/') + 1)
+    const title = fileName
+      .replace(/\.jpeg$/i, '')
+      .replace(/╠ü/g, '\u0301')
+      .normalize('NFC')
+      .replace(/\s+/g, ' ')
+      .trim()
 
     return {
       src,
-      ...descriptions[fileName]
+      category: 'Servicios y trabajos realizados',
+      title,
+      alt: title
     }
   })
 
@@ -177,7 +62,7 @@ const showNext = () => {
         </p>
       </header>
 
-      <div class="portfolio-carousel" aria-roledescription="carrusel">
+      <div v-if="currentImage" class="portfolio-carousel" aria-roledescription="carrusel">
         <Transition name="portfolio-fade" mode="out-in">
           <article :key="currentIndex" class="portfolio-project">
             <div class="portfolio-image">
@@ -294,7 +179,7 @@ const showNext = () => {
 
 .portfolio-image {
   position: relative;
-  min-height: 440px;
+  height: 440px;
   overflow: hidden;
   background: #1e293b;
 }
@@ -303,7 +188,6 @@ const showNext = () => {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 440px;
   object-fit: cover;
 }
 
@@ -449,9 +333,8 @@ const showNext = () => {
     grid-template-columns: 1fr;
   }
 
-  .portfolio-image,
-  .portfolio-image img {
-    min-height: 300px;
+  .portfolio-image {
+    height: 300px;
   }
 
   .portfolio-details {
@@ -468,9 +351,8 @@ const showNext = () => {
     font-size: 1.65rem;
   }
 
-  .portfolio-image,
-  .portfolio-image img {
-    min-height: 240px;
+  .portfolio-image {
+    height: 240px;
   }
 }
 

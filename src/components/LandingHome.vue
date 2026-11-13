@@ -14,9 +14,9 @@ import CTASection from "./Landing/CTASection.vue";
 
 <HeroSection />
 
-<TabsSection />
-
 <PortfolioSection />
+
+<TabsSection />
 
 <CTASection />
 
